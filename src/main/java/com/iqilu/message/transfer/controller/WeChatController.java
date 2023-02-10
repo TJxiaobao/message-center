@@ -29,6 +29,9 @@ public class WeChatController {
         return Result.ok(checkResult);
     }
 
+    /**
+     * 测试请求
+     */
     @GetMapping(value = "/connection")
     public Result<?> test() {
         return Result.ok();
