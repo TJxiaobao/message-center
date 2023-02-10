@@ -23,7 +23,7 @@ public class Result<T> {
     /**
      * 接口提示信息
      */
-    String message;
+    String message = "请求成功";
 
     /**
      * 数据对象
