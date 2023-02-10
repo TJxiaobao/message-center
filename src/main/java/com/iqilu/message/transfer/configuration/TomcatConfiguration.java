@@ -1,11 +1,16 @@
 package com.iqilu.message.transfer.configuration;
 
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.apache.catalina.connector.Connector;
 import org.apache.tomcat.util.http.LegacyCookieProcessor;
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
+
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author 卢斌
@@ -33,4 +38,5 @@ public class TomcatConfiguration {
         return (factory) -> factory.addContextCustomizers(
                 (context) -> context.setCookieProcessor(new LegacyCookieProcessor()));
     }
+    
 }

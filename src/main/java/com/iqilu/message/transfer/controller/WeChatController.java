@@ -29,4 +29,9 @@ public class WeChatController {
         return Result.ok(checkResult);
     }
 
+    @GetMapping(value = "/connection")
+    public Result<?> test() {
+        return Result.ok();
+    }
+
 }
