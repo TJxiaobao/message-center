@@ -31,7 +31,7 @@ public class WeChatServiceImpl implements WeChatService {
      * @return 是否验签成功
      */
     @Override
-    public Boolean acceptSignature(String signature, String timestamp, String nonce) {
+    public boolean acceptSignature(String signature, String timestamp, String nonce) {
         ArrayList<String> paramArrayList = new ArrayList<String>(3) {{
             add(weChatSignToken);
             add(timestamp);
