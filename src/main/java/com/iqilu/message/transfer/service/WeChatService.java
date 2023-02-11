@@ -19,5 +19,5 @@ public interface WeChatService {
      * @param echoStr   随机字符串
      * @return  是否验签成功
      */
-    Boolean acceptSignature(@NotBlank String signature,@NotBlank String timestamp,@NotBlank String nonce,@NotBlank String echoStr);
+    String acceptSignature(@NotBlank String signature,@NotBlank String timestamp,@NotBlank String nonce,@NotBlank String echoStr);
 }
