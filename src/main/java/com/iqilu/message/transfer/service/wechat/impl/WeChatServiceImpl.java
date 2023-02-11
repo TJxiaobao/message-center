@@ -1,13 +1,16 @@
-package com.iqilu.message.transfer.service.impl;
+package com.iqilu.message.transfer.service.wechat.impl;
 
 import cn.hutool.crypto.digest.DigestAlgorithm;
 import cn.hutool.crypto.digest.Digester;
-import com.iqilu.message.transfer.service.WeChatService;
+import com.iqilu.message.transfer.pojo.wechat.WeChatLoginResult;
+import com.iqilu.message.transfer.service.wechat.WeChatService;
+import com.iqilu.message.transfer.service.wechat.management.WeChatUserManagement;
+import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Formatter;
@@ -15,12 +18,15 @@ import java.util.Formatter;
 /**
  * @author 卢斌
  */
-@Service("WeChatService")
+@Service
 public class WeChatServiceImpl implements WeChatService {
 
 
     @Value("${chat.application.token}")
     private String weChatSignToken;
+
+    @Autowired
+    private WeChatUserManagement weChatUserManagement;
 
     /**
      * 微信公众平台验签
@@ -45,6 +51,20 @@ public class WeChatServiceImpl implements WeChatService {
         Digester sha1 = new Digester(DigestAlgorithm.SHA1);
         String signValue = byteToHex(sha1.digest(signParam.toString()));
         return signature.equalsIgnoreCase(signValue);
+    }
+
+    /**
+     * 用户登录与注册；
+     * - 存在用户信息则登录，数据库中如果没有该用户的openId则先完成基础的注册
+     *
+     * @param code 登录code
+     * @return token
+     */
+    @Override
+    public String userLogin(String code) {
+        // 调用微信小程序官方登录接口获取OpenId和SessionKey
+        WeChatLoginResult loginResult = weChatUserManagement.requestLogin(code);
+        return loginResult.getOpenId();
     }
 
 

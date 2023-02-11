@@ -1,11 +1,10 @@
 package com.iqilu.message.transfer.controller;
 
 import com.iqilu.message.transfer.controller.result.Result;
-import com.iqilu.message.transfer.service.WeChatService;
+import com.iqilu.message.transfer.service.wechat.WeChatService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 
 /**
@@ -24,6 +22,7 @@ import java.io.PrintWriter;
 @ResponseBody
 @RequestMapping(value = "/wechat")
 public class WeChatController {
+
 
     @Autowired
     private WeChatService weChatService;
@@ -42,6 +41,14 @@ public class WeChatController {
             writer.close();
         }
     }
+
+
+    @GetMapping(value = "/openId")
+    public Result<String> getUserOpenId() {
+        return null;
+    }
+
+
 
     /**
      * 测试请求
