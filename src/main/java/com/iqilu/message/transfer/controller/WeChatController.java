@@ -2,6 +2,7 @@ package com.iqilu.message.transfer.controller;
 
 import com.iqilu.message.transfer.controller.result.Result;
 import com.iqilu.message.transfer.service.WeChatService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -17,6 +18,7 @@ import java.io.PrintWriter;
 /**
  * @author 卢斌
  */
+@Log4j2
 @Controller
 @ResponseBody
 @RequestMapping(value = "/wechat")
@@ -32,6 +34,7 @@ public class WeChatController {
     @GetMapping(value = "/signature", params = {"signature", "timestamp", "nonce", "echostr"})
     public void checkWeChatSignature(String signature, String timestamp, String nonce, String echoStr, HttpServletResponse response) throws IOException {
         Boolean checkResult = weChatService.acceptSignature(signature, timestamp, nonce);
+        log.debug("验签结果：{}, echoStr:{}", checkResult, echoStr);
         if (Boolean.TRUE.equals(checkResult)) {
             PrintWriter writer = response.getWriter();
             writer.print(echoStr);
