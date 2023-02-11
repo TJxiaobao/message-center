@@ -32,7 +32,7 @@ public class WeChatServiceImpl implements WeChatService {
      * @return 是否验签成功
      */
     @Override
-    public Boolean acceptSignature(String signature, String timestamp, String nonce, String echoStr) {
+    public String acceptSignature(String signature, String timestamp, String nonce, String echoStr) {
         ArrayList<String> paramArrayList = new ArrayList<String>(3) {{
             add(weChatSignToken);
             add(timestamp);
@@ -45,7 +45,12 @@ public class WeChatServiceImpl implements WeChatService {
         }
         Digester sha1 = new Digester(DigestAlgorithm.SHA1);
         String signValue = byteToHex(sha1.digest(signParam.toString()));
-        return signature.equalsIgnoreCase(signValue);
+        Boolean checkResult = signature.equalsIgnoreCase(signValue);
+        if (Boolean.TRUE.equals(checkResult)) {
+            return echoStr;
+        } else {
+            return null;
+        }
     }
 
 

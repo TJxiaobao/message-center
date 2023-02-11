@@ -24,9 +24,8 @@ public class WeChatController {
      * 微信公众平台验签
      */
     @GetMapping(value = "/signature", params = {"signature", "timestamp", "nonce", "echostr"})
-    public Result<?> checkWeChatSignature(String signature, String timestamp, String nonce, String echoStr) {
-        Boolean checkResult = weChatService.acceptSignature(signature, timestamp, nonce, echoStr);
-        return Result.ok(checkResult);
+    public String checkWeChatSignature(String signature, String timestamp, String nonce, String echoStr) {
+        return weChatService.acceptSignature(signature, timestamp, nonce, echoStr);
     }
 
     /**
