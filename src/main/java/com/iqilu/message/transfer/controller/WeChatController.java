@@ -32,6 +32,7 @@ public class WeChatController {
     @GetMapping(value = "/signature", params = {"signature", "timestamp", "nonce", "echostr"})
     public void checkWeChatSignature(String signature, String timestamp, String nonce, String echoStr, HttpServletResponse response) throws IOException {
         Boolean checkResult = weChatService.acceptSignature(signature, timestamp, nonce);
+
         if (Boolean.TRUE.equals(checkResult)) {
             PrintWriter writer = response.getWriter();
             writer.print(echoStr);
