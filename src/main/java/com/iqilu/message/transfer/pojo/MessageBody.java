@@ -21,6 +21,8 @@ public class MessageBody implements Serializable {
 
     private JSONObject templateParam;
 
+    private String templateCode;
+
     private JSONObject attachConfig;
 
 }

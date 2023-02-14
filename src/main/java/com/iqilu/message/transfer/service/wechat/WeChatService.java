@@ -1,9 +1,13 @@
 package com.iqilu.message.transfer.service.wechat;
 
+import com.iqilu.message.transfer.aop.PrimaryKeyParam;
+import com.iqilu.message.transfer.aop.StrParam;
+import com.iqilu.message.transfer.pojo.MessageBody;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 /**
  * @author 卢斌
@@ -30,6 +34,17 @@ public interface WeChatService {
      * @return  token
      */
     String userLogin(@NotBlank@Length(max = 128) String code);
+
+
+    /**
+     * 散装发送多条微信通知
+     *
+     * 模板参数内容允许不一样，但是必须使用同一个微信消息推送模板
+     *
+     * @param messageList       消息列表
+     */
+    void sendWechatMessageBulk(List<MessageBody> messageList);
+
 
 
 }
