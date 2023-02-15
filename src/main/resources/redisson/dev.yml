@@ -1,0 +1,40 @@
+#sentinelServersConfig:
+#  idleConnectionTimeout: 10000
+#  connectTimeout: 10000
+#  timeout: 3000
+#  retryAttempts: 3
+#  retryInterval: 1500
+#  password:
+#  subscriptionsPerConnection: 5
+#  clientName: null
+#  loadBalancer: !<org.redisson.connection.balancer.RoundRobinLoadBalancer> { }
+#  slaveConnectionMinimumIdleSize: 32
+#  slaveConnectionPoolSize: 128
+#  masterConnectionMinimumIdleSize: 32
+#  masterConnectionPoolSize: 128
+#  checkSentinelsList: false
+#  readMode: "SLAVE"
+#  sentinelAddresses:
+#    - redis://10.0.117.216:26379
+#  masterName: "mymaster"
+#  database: 0
+
+singleServerConfig:
+  address: redis://localhost:6379
+  #clientName: null
+  #database: 0 #选择使用哪个数据库0~15
+  #idleConnectionTimeout: 10000
+  #pingTimeout: 1000
+  #connectTimeout: 10000
+  #timeout: 3000
+  #retryAttempts: 3
+  #retryInterval: 1500
+  #reconnectionTimeout: 3000
+  #failedAttempts: 3
+  #subscriptionsPerConnection: 5
+  #subscriptionConnectionMinimumIdleSize: 1
+  #subscriptionConnectionPoolSize: 50
+  #connectionMinimumIdleSize: 32
+  #connectionPoolSize: 64
+  #dnsMonitoringInterval: 5000
+  #dnsMonitoring: false
