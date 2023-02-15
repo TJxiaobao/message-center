@@ -8,8 +8,6 @@ import com.iqilu.message.transfer.service.wechat.WeChatService;
 import com.iqilu.message.transfer.service.wechat.management.WeChatUserManagement;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.validator.constraints.Length;
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -32,12 +30,6 @@ public class WeChatServiceImpl implements WeChatService {
 
     @Value("${chat.application.token}")
     private String weChatSignToken;
-
-    @Value("${chat.redis-lock.access-token}")
-    private String accessTokenLockKey;
-
-    @Autowired
-    private RedissonClient redissonClient;
 
     @Autowired
     private WeChatUserManagement weChatUserManagement;
@@ -93,25 +85,8 @@ public class WeChatServiceImpl implements WeChatService {
         if (CollectionUtils.isEmpty(messageList)) {
             return;
         }
-        RLock lock = redissonClient.getLock(accessTokenLockKey);
-        try {
-            boolean isLocked = lock.tryLock(10, 8, TimeUnit.SECONDS);
-            if (isLocked) {
-                for(MessageBody messageBody : messageList) {
-                    weChatUserManagement.sendWechatMessage(messageBody);
-                }
-            }
-        } catch (InterruptedException interruptedException) {
-            log.warn("发送消息时获取锁发生异常");
-            interruptedException.printStackTrace();
-        } finally {
-            if (lock != null && lock.isLocked() && lock.isHeldByCurrentThread()) {
-                try {
-                    lock.unlock();
-                } catch (Exception e) {
-                    log.error("发送消息时解锁异常 -> ", e);
-                }
-            }
+        for(MessageBody messageBody : messageList) {
+            weChatUserManagement.sendWechatMessage(messageBody);
         }
     }
 

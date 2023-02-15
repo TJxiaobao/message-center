@@ -7,7 +7,6 @@ import com.iqilu.message.transfer.exception.CustomException;
 import com.iqilu.message.transfer.pojo.MessageBody;
 import com.iqilu.message.transfer.pojo.wechat.WeChatLoginResult;
 import lombok.extern.log4j.Log4j2;
-import net.bytebuddy.dynamic.scaffold.MethodGraph;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -54,9 +53,6 @@ public class WeChatUserManagement {
 
     @Value("${chat.redis-key.access-token.value}")
     private String accessTokenRedisKey;
-
-    @Value("${chat.push-message-url}")
-    private String accessPushUrl;
 
     @Autowired
     private RedisTemplate<String, Serializable> redisTemplate;
