@@ -23,6 +23,11 @@ public enum SendWayEnum implements Serializable {
     /**
      * 短信推送
      */
-    SMS;
+    SMS,
+
+    /**
+     * socket推送
+     */
+    SOCKET;
 
 }

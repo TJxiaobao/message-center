@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iqilu.message.transfer.dao.SocketMessageDao">
+
+    <resultMap id="toMessage" type="com.iqilu.message.transfer.pojo.MessageBody">
+        <id column="id" property="id"/>
+        <result column="app_id" property="appId"/>
+        <result column="receiver_key" property="receiver"/>
+        <result column="sender_key" property="sender"/>
+        <result column="message_info" property="messageContent"/>
+        <result column="create_at" property="createTime"/>
+    </resultMap>
+
+    <sql id="selectSocketMessage">
+        select id, app_id, receiver_key, sender_key, message_info, create_at from tb_socket_message where
+    </sql>
+
+    <insert id="saveMessage" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into tb_socket_message (app_id, receiver_key, sender_key, message_info)
+        values
+        <foreach collection="messageBodyList" separator="," item="one">
+            (#{one.appId}, #{one.receiver}, #{one.sender}, #{one.messageContent})
+        </foreach>
+    </insert>
+
+
+    <delete id="deleteMessageByReceiver">
+        delete from tb_socket_message where id = #{messageId} and app_id = #{appId} and receiver_key = #{receiver}
+    </delete>
+
+
+    <select id="listAllNeedReceiveMessage" resultMap="toMessage">
+        <include refid="selectSocketMessage"/>
+        receiver_key = #{receiver} and app_id = #{appId} order by id
+    </select>
+
+
+    <select id="listMessageBodyInIdList" resultMap="toMessage">
+        <include refid="selectSocketMessage"/>
+        app_id = #{appId} and id in
+        <foreach collection="messageIdList" open="(" separator="," close=")" item="one">
+            #{one}
+        </foreach>
+    </select>
+
+
+    <delete id="deleteBufferedMessage">
+        delete from tb_socket_message where app_id = #{appId} and id in
+        <foreach collection="messageIdList" open="(" separator="," close=")" item="one">
+            #{one}
+        </foreach>
+    </delete>
+
+
+</mapper>
