@@ -43,6 +43,9 @@ public class AsyncInsideMessage {
 
         // sendSuccessList，保存发送成功的消息（messageBody）的Id
         List<Long> sendSuccessList = new LinkedList<>();
+
+
+        // 缓存的多条未发送消息循环发送（因为是后台消息是逐条发的为了保证消息真实性所以发送缓存内容也应该逐条发送）
         for (MessageBody messageBody : messageBodyList) {
             String receiver = messageBody.getReceiver();
             String receiverSessionKey = buildSocketSessionKey(receiver, appId);
@@ -59,6 +62,7 @@ public class AsyncInsideMessage {
                 continue;
             }
 
+            // 标记发送成功的消息Id
             sendSuccessList.add(messageBody.getId());
         }
         if (! CollectionUtils.isEmpty(sendSuccessList)) {
