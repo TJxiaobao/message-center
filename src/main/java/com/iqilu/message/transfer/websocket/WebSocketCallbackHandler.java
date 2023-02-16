@@ -49,6 +49,7 @@ public class WebSocketCallbackHandler extends TextWebSocketHandler {
             String primaryKey = attributes.get("userPrimaryKey").toString();
             asyncInsideMessage.receiveMessage(appId, primaryKey);
         }
+        session.sendMessage(message);
     }
 
 
