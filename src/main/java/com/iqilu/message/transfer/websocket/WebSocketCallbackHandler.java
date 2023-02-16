@@ -3,6 +3,7 @@ package com.iqilu.message.transfer.websocket;
 import com.iqilu.message.transfer.service.inside.management.AsyncInsideMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -22,6 +23,9 @@ public class WebSocketCallbackHandler extends TextWebSocketHandler {
     @Autowired
     private AsyncInsideMessage asyncInsideMessage;
 
+    @Value("${socket.receive-command}")
+    private String socketReceiveCommand;
+
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -38,10 +42,14 @@ public class WebSocketCallbackHandler extends TextWebSocketHandler {
     @Override
     @SuppressWarnings("NullableProblems")
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        Map<String, Object> attributes = session.getAttributes();
-        String appId = attributes.get("appId").toString();
-        String primaryKey = attributes.get("userPrimaryKey").toString();
-        asyncInsideMessage.receiveMessage(appId, primaryKey);
+        String messageText = message.getPayload();
+        if (socketReceiveCommand.equalsIgnoreCase(messageText)) {
+            Map<String, Object> attributes = session.getAttributes();
+            String appId = attributes.get("appId").toString();
+            String primaryKey = attributes.get("userPrimaryKey").toString();
+            asyncInsideMessage.receiveMessage(appId, primaryKey);
+        }
+        session.sendMessage(message);
     }
 
 
