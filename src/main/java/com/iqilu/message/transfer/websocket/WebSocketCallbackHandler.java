@@ -39,6 +39,9 @@ public class WebSocketCallbackHandler extends TextWebSocketHandler {
     }
 
 
+    /**
+     * 当接收到发送到来的socket消息时，不论发送内容
+     */
     @Override
     @SuppressWarnings("NullableProblems")
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -48,8 +51,10 @@ public class WebSocketCallbackHandler extends TextWebSocketHandler {
             String appId = attributes.get("appId").toString();
             String primaryKey = attributes.get("userPrimaryKey").toString();
             asyncInsideMessage.receiveMessage(appId, primaryKey);
+        } else {
+            session.sendMessage(message);
         }
-        session.sendMessage(message);
+
     }
 
 
