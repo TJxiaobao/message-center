@@ -48,4 +48,7 @@ public class MessageParam implements Serializable {
      */
     private String signName;
 
+
+    private String appId;
+
 }

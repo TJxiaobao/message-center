@@ -4,6 +4,7 @@ import com.iqilu.message.transfer.controller.result.Result;
 import com.iqilu.message.transfer.exception.CustomException;
 import com.iqilu.message.transfer.exception.CustomerErrorException;
 import com.iqilu.message.transfer.pojo.MessageParam;
+import com.iqilu.message.transfer.service.inside.InsideService;
 import com.iqilu.message.transfer.service.sms.SmsService;
 import com.iqilu.message.transfer.service.wechat.WeChatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class MessageConcentrateController {
     private WeChatService weChatService;
 
 
+    @Autowired
+    private InsideService insideService;
+
+
+
     @PostMapping(value = "/message")
     public Result<?> sendMessage(@RequestBody MessageParam messageParam) {
         try {
@@ -36,6 +42,9 @@ public class MessageConcentrateController {
                     break;
                 case WECHAT:
                     weChatService.sendWechatMessageBulk(messageParam.getMessageList());
+                    break;
+                case SOCKET:
+                    insideService.pushInsideMessage(messageParam.getSender(), messageParam.getAppId(), messageParam.getMessageList());
                     break;
                 default:
                     throw new CustomException("暂不支持该类发送方式");

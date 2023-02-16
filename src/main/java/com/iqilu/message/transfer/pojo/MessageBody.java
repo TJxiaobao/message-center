@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author lubin
@@ -15,7 +16,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class MessageBody implements Serializable {
 
+    private Long id;
+
     private String receiver;
+
+    private String appId;
+
+    private String sender;
 
     private String messageContent;
 
@@ -24,5 +31,7 @@ public class MessageBody implements Serializable {
     private String templateCode;
 
     private JSONObject attachConfig;
+
+    private Date createTime;
 
 }
