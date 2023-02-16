@@ -40,7 +40,7 @@ public class WebSocketCallbackHandler extends TextWebSocketHandler {
 
 
     /**
-     * 当接收到发送到来的socket消息时，不论发送内容
+     * 当接收到发送到来的socket消息时，如果服务端收到消息接收指令则回复缓存的未接收消息，否则视为心跳消息。
      */
     @Override
     @SuppressWarnings("NullableProblems")
@@ -58,7 +58,9 @@ public class WebSocketCallbackHandler extends TextWebSocketHandler {
     }
 
 
-
+    /**
+     * socket连接断开后，从会话队列中删除该socket会话。
+     */
     @Override
     @SuppressWarnings("NullableProblems")
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
