@@ -71,7 +71,12 @@ public class AsyncInsideMessage {
     }
 
 
-
+    /**
+     * 主动接收消息
+     *
+     * @param appId                 APPID
+     * @param receiverPrimaryKey    用户唯一识别
+     */
     public void receiveMessage(String appId, String receiverPrimaryKey) {
         String receiverSessionKey = buildSocketSessionKey(receiverPrimaryKey, appId);
         WebSocketSession webSocketSession = WebSocketManager.get(receiverSessionKey);
