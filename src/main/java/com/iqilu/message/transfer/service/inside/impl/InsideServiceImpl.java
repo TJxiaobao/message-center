@@ -13,7 +13,6 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.Executor;
 
 /**
  * @author 卢斌
@@ -31,11 +30,10 @@ public class InsideServiceImpl implements InsideService {
 
 
     /**
-     * 散装发送多条短信
+     * 散装发送多条socket消息
      * <p>
-     * 短信发送目标收到的短信内容允许不一样，但是必须使用同一个阿里短信模板。
      *
-     * @param senderPrimaryKey 发送者电话号码
+     * @param senderPrimaryKey 发送者唯一标识
      * @param appId            应用Id
      * @param messageList      消息列表
      */
