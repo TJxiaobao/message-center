@@ -55,11 +55,17 @@ public class InsideServiceImpl implements InsideService {
             eachMessage.setAppId(appId);
             eachMessage.setSender(senderPrimaryKey);
         }
+
+        // 将待发送消息先保存到数据库中
         socketMessageDao.saveMessage(messageList);
+
+        // 将保存到数据库的消息实体取出消息Id
         List<Long> messageIdList = new LinkedList<>();
         for (MessageBody eachMessageBody : messageList) {
             messageIdList.add(eachMessageBody.getId());
         }
+
+        // 异步线程池发送socket消息
         asyncInsideMessage.asyncPushSocketMessage(appId, messageIdList);
     }
 }
