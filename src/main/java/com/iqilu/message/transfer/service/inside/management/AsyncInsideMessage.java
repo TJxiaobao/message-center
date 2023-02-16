@@ -31,12 +31,6 @@ public class AsyncInsideMessage {
      */
     @Async("insideMessageThreadLoop")
     public void asyncPushSocketMessage(String appId, List<Long> messageBodyIdList) {
-        try {
-            Thread.sleep(10000L);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         if (CollectionUtils.isEmpty(messageBodyIdList) || StringUtils.isBlank(appId)) {
             return;
         }
