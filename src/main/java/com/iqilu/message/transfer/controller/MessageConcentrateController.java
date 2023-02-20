@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author lubin
+ * @author 卢斌
  */
 @Controller
 @ResponseBody
