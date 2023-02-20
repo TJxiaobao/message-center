@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author lubin
+ * @author 卢斌
  */
 @Controller
 @ResponseBody
@@ -25,8 +25,7 @@ public class MessageConcentrateController {
 
     @Autowired
     private WeChatService weChatService;
-
-
+    
     @Autowired
     private InsideService insideService;
 
@@ -55,5 +54,15 @@ public class MessageConcentrateController {
 
         return Result.ok();
     }
+
+
+    /**
+     * 刷新缓存的APP-SECRETE
+     */
+    @GetMapping(value = "/refresh_app_secret")
+    public void refreshAppSecretRedisBuffer() {
+        insideService.refreshInsideAppSecret();
+    }
+
 
 }
