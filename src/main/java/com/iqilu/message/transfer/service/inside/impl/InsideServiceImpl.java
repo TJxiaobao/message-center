@@ -1,18 +1,25 @@
 package com.iqilu.message.transfer.service.inside.impl;
 
 import com.aliyun.core.utils.StringUtils;
+import com.iqilu.message.transfer.dao.AppSecretDao;
 import com.iqilu.message.transfer.dao.SocketMessageDao;
 import com.iqilu.message.transfer.exception.CustomException;
+import com.iqilu.message.transfer.pojo.AppSecret;
 import com.iqilu.message.transfer.pojo.MessageBody;
 import com.iqilu.message.transfer.service.inside.InsideService;
 import com.iqilu.message.transfer.service.inside.management.AsyncInsideMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 卢斌
@@ -24,9 +31,17 @@ public class InsideServiceImpl implements InsideService {
     @Autowired
     private SocketMessageDao socketMessageDao;
 
-
     @Autowired
     private AsyncInsideMessage asyncInsideMessage;
+
+    @Value("${socket.inside-secret-key}")
+    private String appSecretKey;
+
+    @Autowired
+    private AppSecretDao appSecretDao;
+
+    @Autowired
+    private RedisTemplate<String, Serializable> redisTemplate;
 
 
     /**
@@ -65,5 +80,20 @@ public class InsideServiceImpl implements InsideService {
 
         // 异步线程池发送socket消息
         asyncInsideMessage.asyncPushSocketMessage(appId, messageIdList);
+    }
+
+    /**
+     * 刷新缓存的APP-SECRETE
+     */
+    @Override
+    public void refreshInsideAppSecret() {
+        List<AppSecret> secrets = appSecretDao.listAllAppSecrets();
+        Map<String, AppSecret> mapParam = new HashMap<>();
+        if (! CollectionUtils.isEmpty(secrets)) {
+            for (AppSecret appSecret : secrets) {
+                mapParam.put(appSecret.getAppId(), appSecret);
+            }
+        }
+        redisTemplate.opsForHash().putAll(appSecretKey, mapParam);
     }
 }

@@ -21,4 +21,10 @@ public interface InsideService {
      */
     void pushInsideMessage(@StrParam String senderPrimaryKey, @StrParam String appId, @Size(min = 1) List<MessageBody> messageList);
 
+
+    /**
+     * 刷新缓存的APP-SECRETE
+     */
+    void refreshInsideAppSecret();
+
 }
