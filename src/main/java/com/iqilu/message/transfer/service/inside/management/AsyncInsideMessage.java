@@ -65,7 +65,7 @@ public class AsyncInsideMessage {
             // 标记发送成功的消息Id
             sendSuccessList.add(messageBody.getId());
         }
-        if (! CollectionUtils.isEmpty(sendSuccessList)) {
+        if (!CollectionUtils.isEmpty(sendSuccessList)) {
             socketMessageDao.deleteBufferedMessage(appId, sendSuccessList);
         }
     }
@@ -74,8 +74,8 @@ public class AsyncInsideMessage {
     /**
      * 主动接收消息
      *
-     * @param appId                 APPID
-     * @param receiverPrimaryKey    用户唯一识别
+     * @param appId              APPID
+     * @param receiverPrimaryKey 用户唯一识别
      */
     public void receiveMessage(String appId, String receiverPrimaryKey) {
         String receiverSessionKey = buildSocketSessionKey(receiverPrimaryKey, appId);
@@ -84,7 +84,7 @@ public class AsyncInsideMessage {
             return;
         }
         List<MessageBody> messageBodyList = socketMessageDao.listAllNeedReceiveMessage(receiverPrimaryKey, appId);
-        if (! CollectionUtils.isEmpty(messageBodyList)) {
+        if (!CollectionUtils.isEmpty(messageBodyList)) {
             // sendSuccessList，保存发送成功的消息（messageBody）的Id
             List<Long> sendSuccessList = new LinkedList<>();
             for (MessageBody messageBody : messageBodyList) {
@@ -97,7 +97,7 @@ public class AsyncInsideMessage {
                 }
                 sendSuccessList.add(messageBody.getId());
             }
-            if (! CollectionUtils.isEmpty(sendSuccessList)) {
+            if (!CollectionUtils.isEmpty(sendSuccessList)) {
                 socketMessageDao.deleteBufferedMessage(appId, sendSuccessList);
             }
         }
@@ -107,9 +107,9 @@ public class AsyncInsideMessage {
     /**
      * 通过appId和用户唯一标识生成一个socket会话唯一标识
      *
-     * @param userPrimaryKey    用户唯一标识
-     * @param appId             appId
-     * @return  socket会话池的Key
+     * @param userPrimaryKey 用户唯一标识
+     * @param appId          appId
+     * @return socket会话池的Key
      */
     public static String buildSocketSessionKey(String userPrimaryKey, String appId) {
         return "" + appId + "-" + userPrimaryKey;

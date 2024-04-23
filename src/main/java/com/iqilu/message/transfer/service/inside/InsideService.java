@@ -15,9 +15,9 @@ public interface InsideService {
     /**
      * 散装发送多条socket消息
      *
-     * @param senderPrimaryKey  发送者电话号码
-     * @param appId             应用Id
-     * @param messageList       消息列表
+     * @param senderPrimaryKey 发送者电话号码
+     * @param appId            应用Id
+     * @param messageList      消息列表
      */
     void pushInsideMessage(@StrParam String senderPrimaryKey, @StrParam String appId, @Size(min = 1) List<MessageBody> messageList);
 

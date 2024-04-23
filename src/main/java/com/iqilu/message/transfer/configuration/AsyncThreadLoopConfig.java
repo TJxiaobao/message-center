@@ -17,7 +17,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class AsyncThreadLoopConfig {
 
 
-
     @Bean("insideMessageThreadLoop")
     public Executor insideMessageThreadLoop() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();

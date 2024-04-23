@@ -41,7 +41,7 @@ public class SmsServiceImpl implements SmsService {
         }
         Stack<Long> phoneArrayStack = new Stack<>();
         phoneArrayStack.addAll(new HashSet<>(phoneList));
-        while (! CollectionUtils.isEmpty(phoneArrayStack)) {
+        while (!CollectionUtils.isEmpty(phoneArrayStack)) {
             LinkedList<Long> batchPhone = new LinkedList<>();
             for (int i = 0; i < smsBatchMaxSize; i++) {
                 if (phoneArrayStack.isEmpty()) {
@@ -67,7 +67,7 @@ public class SmsServiceImpl implements SmsService {
         if (CollectionUtils.isEmpty(messageList)) {
             return;
         }
-        if (! StringUtils.isBlank(templateCode)) {
+        if (!StringUtils.isBlank(templateCode)) {
             if (StringUtils.isBlank(signName)) {
                 throw new CustomException("请指定signName");
             }

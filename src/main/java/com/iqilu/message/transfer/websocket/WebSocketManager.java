@@ -20,11 +20,11 @@ public class WebSocketManager {
         // 添加 session
         SESSION_POOL.put(key, session);
     }
-    
+
 
     public static WebSocketSession remove(String key) {
         // 删除 session
-        if (! StringUtil.isNullOrEmpty(key)) {
+        if (!StringUtil.isNullOrEmpty(key)) {
             return SESSION_POOL.remove(key);
         } else {
             return null;

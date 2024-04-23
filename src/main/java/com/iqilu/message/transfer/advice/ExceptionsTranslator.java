@@ -87,13 +87,13 @@ public class ExceptionsTranslator {
         Map<String, String[]> storage = request.getParameterMap();
         StringBuilder stringBuffer = new StringBuilder();
         stringBuffer.append("请求路径：").append(url);
-        for(String i: storage.keySet()){
+        for (String i : storage.keySet()) {
             stringBuffer.append("参数").append(i).append(":");
             String[] para = storage.get(i);
-            if(para == null){
+            if (para == null) {
                 continue;
             }
-            for(String j:para){
+            for (String j : para) {
                 stringBuffer.append(j).append(" ");
             }
         }

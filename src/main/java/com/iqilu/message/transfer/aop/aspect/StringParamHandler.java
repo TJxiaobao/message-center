@@ -43,7 +43,7 @@ public class StringParamHandler implements ConstraintValidator<StrParam, String>
         if (s.length() < minLength) {
             return false;
         }
-        if (! acceptSpace) {
+        if (!acceptSpace) {
             return !s.contains(" ");
         }
         return true;

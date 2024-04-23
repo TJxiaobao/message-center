@@ -28,7 +28,7 @@ public class AppSecret implements Serializable {
      *
      * @param signature 签名参数
      * @param timestamp 时间戳
-     * @return  验签结果
+     * @return 验签结果
      */
     public boolean checkSign(String signature, String timestamp) {
         if (StringUtils.isBlank(timestamp)) {

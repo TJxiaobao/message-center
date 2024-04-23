@@ -34,7 +34,7 @@ public @interface StrParam {
     /**
      * 最小长度
      */
-    int minLength() default  1;
+    int minLength() default 1;
 
     /**
      * 最大长度

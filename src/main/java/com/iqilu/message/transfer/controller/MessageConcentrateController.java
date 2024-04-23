@@ -25,10 +25,9 @@ public class MessageConcentrateController {
 
     @Autowired
     private WeChatService weChatService;
-    
+
     @Autowired
     private InsideService insideService;
-
 
 
     @PostMapping(value = "/message")

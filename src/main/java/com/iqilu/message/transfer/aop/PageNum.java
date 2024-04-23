@@ -1,7 +1,6 @@
 package com.iqilu.message.transfer.aop;
 
 
-
 import com.iqilu.message.transfer.aop.aspect.PageNumHandler;
 
 import javax.validation.Constraint;

@@ -67,14 +67,14 @@ public class Result<T> {
         return result;
     }
 
-    public static <T>Result<T> ok(T data) {
+    public static <T> Result<T> ok(T data) {
         Result<T> result = new Result<>();
         result.setStatus(1);
         result.setData(data);
         return result;
     }
 
-    public static <T>Result<T> fail(String message) {
+    public static <T> Result<T> fail(String message) {
         Result<T> result = new Result<>();
         result.setStatus(0);
         result.setMessage(message);
@@ -82,21 +82,21 @@ public class Result<T> {
     }
 
 
-    public static <T>Result<T> error(Exception e) {
+    public static <T> Result<T> error(Exception e) {
         Result<T> result = new Result<>();
         result.setStatus(-1);
         result.setMessage(e.getMessage());
         return result;
     }
 
-    public static <T>Result<T> error(String e) {
+    public static <T> Result<T> error(String e) {
         Result<T> result = new Result<>();
         result.setStatus(-1);
         result.setMessage(e);
         return result;
     }
 
-    public static <T>Result<T> ok(List<T> list) {
+    public static <T> Result<T> ok(List<T> list) {
         PageInfo<T> storage = new PageInfo<>(list);
         Result<T> result = new Result<>();
         result.setStatus(1);

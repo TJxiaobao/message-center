@@ -18,7 +18,7 @@ public interface SmsService {
 
     /**
      * 发送相同的短信内容到多个用户
-     *
+     * <p>
      * 所有手机号参数中不得包含空格，必须为11位合法手机号
      *
      * @param senderPhoneNumber 发送人电话号码
@@ -31,11 +31,11 @@ public interface SmsService {
                                @StrParam String templateCode,
                                @StrParam String signName,
                                @NotNull JSONObject templateParam,
-                                List<Long> phoneList);
+                               List<Long> phoneList);
 
     /**
      * 散装发送多条短信
-     *
+     * <p>
      * 短信发送目标收到的短信内容允许不一样，但是必须使用同一个阿里短信模板。
      *
      * @param senderPhoneNumber 发送者电话号码
@@ -43,7 +43,6 @@ public interface SmsService {
      * @param messageList       消息列表
      */
     void sendSmsMessageBulk(@PrimaryKeyParam(max = Long.MAX_VALUE) Long senderPhoneNumber, @StrParam String templateCode, String singName, List<MessageBody> messageList);
-
 
 
 }

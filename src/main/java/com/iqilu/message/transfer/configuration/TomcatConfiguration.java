@@ -38,5 +38,5 @@ public class TomcatConfiguration {
         return (factory) -> factory.addContextCustomizers(
                 (context) -> context.setCookieProcessor(new LegacyCookieProcessor()));
     }
-    
+
 }

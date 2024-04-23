@@ -1,7 +1,6 @@
 package com.iqilu.message.transfer.aop;
 
 
-
 import com.iqilu.message.transfer.aop.aspect.PrimaryKeyParamIntegerHandler;
 import com.iqilu.message.transfer.aop.aspect.PrimaryKeyParamLongHandler;
 
@@ -11,6 +10,7 @@ import java.lang.annotation.*;
 
 /**
  * 参数校验注解，用于整形和长整型；限制数值不为空，并要求最小值为1，最大值可以在mysql的11位整形字段中保存。
+ *
  * @author 卢斌
  */
 @Constraint(validatedBy = {PrimaryKeyParamIntegerHandler.class, PrimaryKeyParamLongHandler.class})

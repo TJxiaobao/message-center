@@ -21,30 +21,29 @@ public interface WeChatService {
      * @param signature 微信加密签名
      * @param timestamp 时间戳字符串
      * @param nonce     随机数
-     * @return  是否验签成功
+     * @return 是否验签成功
      */
-    boolean acceptSignature(@NotBlank String signature,@NotBlank String timestamp,@NotBlank String nonce);
+    boolean acceptSignature(@NotBlank String signature, @NotBlank String timestamp, @NotBlank String nonce);
 
 
     /**
      * 用户登录与注册；
      * - 存在用户信息则登录，数据库中如果没有该用户的openId则先完成基础的注册
      *
-     * @param code  登录code
-     * @return  token
+     * @param code 登录code
+     * @return token
      */
-    String userLogin(@NotBlank@Length(max = 128) String code);
+    String userLogin(@NotBlank @Length(max = 128) String code);
 
 
     /**
      * 散装发送多条微信通知
-     *
+     * <p>
      * 模板参数内容允许不一样，但是必须使用同一个微信消息推送模板
      *
-     * @param messageList       消息列表
+     * @param messageList 消息列表
      */
     void sendWechatMessageBulk(List<MessageBody> messageList);
-
 
 
 }

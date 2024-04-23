@@ -85,7 +85,7 @@ public class WeChatServiceImpl implements WeChatService {
         if (CollectionUtils.isEmpty(messageList)) {
             return;
         }
-        for(MessageBody messageBody : messageList) {
+        for (MessageBody messageBody : messageList) {
             weChatUserManagement.sendWechatMessage(messageBody);
         }
     }
@@ -93,8 +93,9 @@ public class WeChatServiceImpl implements WeChatService {
 
     /**
      * 十六进制字节数组转为字符串
-     * @param hash  16进制数组
-     * @return  字符串
+     *
+     * @param hash 16进制数组
+     * @return 字符串
      */
     private static String byteToHex(final byte[] hash) {
         Formatter formatter = new Formatter();

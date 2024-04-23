@@ -36,8 +36,6 @@ public class WeChatAccessToken {
 
     /**
      * 定时刷新accessToken.
-     *
-     *
      */
     @Scheduled(fixedDelayString = "${chat.access-token.flush-millisecond}")
     public void refreshWechatAccessToken() {

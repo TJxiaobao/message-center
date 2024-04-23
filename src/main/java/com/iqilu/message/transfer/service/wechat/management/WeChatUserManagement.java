@@ -74,11 +74,16 @@ public class WeChatUserManagement {
                 Integer errorCode = jsonObject.getInteger("errcode");
                 if (errorCode != null) {
                     switch (errorCode) {
-                        case -1:    throw new CustomException("系统繁忙，此时请稍候再试");
-                        case 40029: throw new CustomException("登录识别码无效");
-                        case 45011: throw new CustomException("请勿尝试攻击服务器");
-                        case 40226: throw new CustomException("您存在违规操作记录，所以暂时无法使用本软件");
-                        default: throw new CustomException("未知错误");
+                        case -1:
+                            throw new CustomException("系统繁忙，此时请稍候再试");
+                        case 40029:
+                            throw new CustomException("登录识别码无效");
+                        case 45011:
+                            throw new CustomException("请勿尝试攻击服务器");
+                        case 40226:
+                            throw new CustomException("您存在违规操作记录，所以暂时无法使用本软件");
+                        default:
+                            throw new CustomException("未知错误");
                     }
                 }
                 openId = jsonObject.getString("openid");

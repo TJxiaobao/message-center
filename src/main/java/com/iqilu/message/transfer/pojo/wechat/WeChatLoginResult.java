@@ -15,5 +15,5 @@ public class WeChatLoginResult {
     private String openId;
 
     private String sessionKey;
-    
+
 }

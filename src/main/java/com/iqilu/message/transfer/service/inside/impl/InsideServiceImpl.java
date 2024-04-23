@@ -89,7 +89,7 @@ public class InsideServiceImpl implements InsideService {
     public void refreshInsideAppSecret() {
         List<AppSecret> secrets = appSecretDao.listAllAppSecrets();
         Map<String, AppSecret> mapParam = new HashMap<>();
-        if (! CollectionUtils.isEmpty(secrets)) {
+        if (!CollectionUtils.isEmpty(secrets)) {
             for (AppSecret appSecret : secrets) {
                 mapParam.put(appSecret.getAppId(), appSecret);
             }
