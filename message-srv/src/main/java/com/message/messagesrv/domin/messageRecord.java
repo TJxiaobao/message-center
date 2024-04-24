@@ -1,5 +1,8 @@
 package com.message.messagesrv.domin;
 
+import lombok.Data;
+
+@Data
 public class messageRecord {
 
     private Long id;
@@ -13,6 +16,11 @@ public class messageRecord {
      * 业务类型
      */
     private int bizType;
+
+    /**
+     * 消息任务 ID
+     */
+    private String messageTaskId;
 
     /**
      * 消息类型 0 邮件, 1 阿里云短信, 2 腾讯云短信.....

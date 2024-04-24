@@ -1,11 +1,13 @@
 package com.message.job.dispatch;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.stereotype.Component;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import java.util.concurrent.*;
 
 @Component
+@Slf4j
 public class WorkPool implements DisposableBean {
 
     private ThreadPoolExecutor workExecutor;
@@ -18,8 +20,8 @@ public class WorkPool implements DisposableBean {
         // thread factory
         ThreadFactory threadFactory = new ThreadFactoryBuilder()
                 .setUncaughtExceptionHandler((thread, throwable) -> {
-//                    log.error("[Important] WorkerPool workerExecutor has uncaughtException.", throwable);
-//                    log.error("Thread Name {} : {}", thread.getName(), throwable.getMessage(), throwable);
+                    log.error("[Important] WorkPool workExecutor has uncaughtException.", throwable);
+                    log.error("Thread Name {} : {}", thread.getName(), throwable.getMessage(), throwable);
                 })
                 .setDaemon(true)
                 .setNameFormat("send-work-%d")

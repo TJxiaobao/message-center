@@ -1,8 +1,11 @@
 package com.message.job.domin;
 
+import lombok.Data;
+
 /**
  * 消息任务信息
  */
+@Data
 public class messageTaskInfo {
 
     private Long id;

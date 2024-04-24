@@ -1,8 +1,11 @@
 package com.message.job.domin;
 
+import lombok.Data;
+
 /**
  * 调度配置信息
  */
+@Data
 public class messageTaskScheduleConfig {
 
     private Long id;

@@ -1,5 +1,8 @@
 package com.message.messagesrv.domin;
 
+import lombok.Data;
+
+@Data
 public class messageTemplate {
 
     private Long id;
