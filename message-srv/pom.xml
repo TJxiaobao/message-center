@@ -7,6 +7,11 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>message-srv</name>
     <description>message-srv</description>
+    <parent>
+        <groupId>com.message</groupId>
+        <artifactId>message-center</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
