@@ -1,8 +1,10 @@
 package com.message.messagesrv.domin;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
+@TableName(value = "message_record")
 public class messageRecord {
 
     private Long id;

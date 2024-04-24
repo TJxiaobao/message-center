@@ -1,11 +1,13 @@
 package com.message.job.domin;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
  * 消息任务信息
  */
 @Data
+@TableName(value = "message_task_info")
 public class messageTaskInfo {
 
     private Long id;

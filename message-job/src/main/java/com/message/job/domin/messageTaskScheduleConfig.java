@@ -1,11 +1,13 @@
 package com.message.job.domin;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
  * 调度配置信息
  */
 @Data
+@TableName(value = "message_task_schedule_config")
 public class messageTaskScheduleConfig {
 
     private Long id;
