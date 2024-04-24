@@ -24,7 +24,7 @@ public class WorkPool implements DisposableBean {
                 .setDaemon(true)
                 .setNameFormat("send-work-%d")
                 .build();
-        workExecutor = new ThreadPoolExecutor(100,
+        workExecutor = new ThreadPoolExecutor( Runtime.getRuntime().availableProcessors(),
                 1024,
                 10,
                 TimeUnit.SECONDS,

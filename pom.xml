@@ -22,6 +22,8 @@
     <properties>
         <project.version>0.0.1-SNAPSHOT</project.version>
         <java.version>1.8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.6.13</spring-boot.version>
@@ -41,6 +43,8 @@
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-text -->
         <!-- https://oss.sonatype.org/content/repositories/public/org/apache/commons/commons-text -->
         <commons-text.version>1.10.0</commons-text.version>
+        <commonmark.version>0.15.2</commonmark.version>
+        <json.version>20220320</json.version>
     </properties>
 
     <dependencyManagement>
@@ -107,7 +111,46 @@
                 <artifactId>sms4j-spring-boot-starter</artifactId>
                 <version>${sms4j-spring-boot-starter.version}</version>
             </dependency>
+            <!--commommark插件-->
+            <dependency>
+                <groupId>com.atlassian.commonmark</groupId>
+                <artifactId>commonmark</artifactId>
+                <version>${commonmark.version}</version>
+            </dependency>
+            <!--为标题添加id的扩展部分-->
+            <dependency>
+                <groupId>com.atlassian.commonmark</groupId>
+                <artifactId>commonmark-ext-heading-anchor</artifactId>
+                <version>${commonmark.version}</version>
+            </dependency>
+            <!--表格的扩展部分 如果markdown里有表格需要这个扩展-->
+            <dependency>
+                <groupId>com.atlassian.commonmark</groupId>
+                <artifactId>commonmark-ext-gfm-tables</artifactId>
+                <version>${commonmark.version}</version>
+            </dependency>
 
+
+            <!-- 原生json -->
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>${json.version}</version>
+            </dependency>
+            <!--提供ObjectMapper-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+            </dependency>
+            <!--提供jakarta.annotation的@Nonnull-->
+            <dependency>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
