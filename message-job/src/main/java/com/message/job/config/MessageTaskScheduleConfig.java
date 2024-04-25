@@ -1,16 +1,21 @@
-package com.message.job.domin;
+package com.message.job.config;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * 调度配置信息
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @TableName(value = "message_task_schedule_config")
+@Configuration
 public class MessageTaskScheduleConfig {
 
-    private Long id;
 
     /**
      * 每次拉取任务数量

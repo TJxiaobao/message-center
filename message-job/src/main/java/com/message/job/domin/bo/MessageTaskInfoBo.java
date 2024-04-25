@@ -1,20 +1,10 @@
-package com.message.job.domin;
+package com.message.job.domin.bo;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-/**
- * 消息任务信息
- */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@TableName(value = "message_task_info")
-public class MessageTaskInfo {
+public class MessageTaskInfoBo {
 
-    private Long id;
 
     /**
      * 消息任务 ID
