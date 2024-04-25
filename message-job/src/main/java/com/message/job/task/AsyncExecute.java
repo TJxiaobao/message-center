@@ -1,18 +1,20 @@
 package com.message.job.task;
 
-import com.message.job.domin.MessageTaskInfo;
-import com.message.messagesrv.domin.MessageRecord;
+import com.message.common.domin.MessageRecord;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class AsyncExecute implements Runnable{
+public class AsyncExecute implements Runnable {
 
     private MessageRecord messageRecord;
-    public AsyncExecute() {}
+
+    public AsyncExecute() {
+    }
 
     public AsyncExecute(MessageRecord messageRecord) {
         this.messageRecord = messageRecord;
     }
+
     @Override
     public void run() {
         try {

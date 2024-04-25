@@ -25,33 +25,35 @@ public class TaskSchedulerService {
     public synchronized void startCronNewTask(String cron, Runnable task, String taskName) {
         //后面从数据库设置和读取
         if (taskMap.size() > threadPoolTaskScheduler.getPoolSize()) {
-            log.error("定时任务大于"+threadPoolTaskScheduler.getPoolSize()+",请稍后在设置");
-        }else {
+            log.error("定时任务大于" + threadPoolTaskScheduler.getPoolSize() + ",请稍后在设置");
+        } else {
             if (ObjectUtils.isEmpty(cron) || taskMap.containsKey(taskName)) {
                 log.error("定时任务开启失败");
             } else {
                 // 第二个参数判断cron表达式是否成立，否则返回null指针异常
-                ScheduledFuture<?> future = threadPoolTaskScheduler.schedule(new Thread(task,taskName), triggerContext -> Objects.requireNonNull(new CronTrigger(cron).nextExecutionTime(triggerContext)));
+                ScheduledFuture<?> future = threadPoolTaskScheduler.schedule(new Thread(task, taskName), triggerContext -> Objects.requireNonNull(new CronTrigger(cron).nextExecutionTime(triggerContext)));
                 taskMap.put(taskName, future);
                 log.info("定时任务开启成功");
             }
         }
 
     }
+
     public synchronized void startCronRetryTask(String cron, Runnable task, String taskName) {
         //后面从数据库设置和读取
         if (taskMap.size() > threadPoolTaskScheduler.getPoolSize()) {
-            log.error("定时任务大于"+threadPoolTaskScheduler.getPoolSize()+",请稍后在设置");
+            log.error("定时任务大于" + threadPoolTaskScheduler.getPoolSize() + ",请稍后在设置");
         }
         if (ObjectUtils.isEmpty(cron) || taskMap.containsKey(taskName)) {
             log.error("定时任务开启失败");
         } else {
             // 第二个参数判断cron表达式是否成立，否则返回null指针异常
-            ScheduledFuture<?> future = threadPoolTaskScheduler.schedule(new Thread(task,taskName), triggerContext -> Objects.requireNonNull(new CronTrigger(cron).nextExecutionTime(triggerContext)));
+            ScheduledFuture<?> future = threadPoolTaskScheduler.schedule(new Thread(task, taskName), triggerContext -> Objects.requireNonNull(new CronTrigger(cron).nextExecutionTime(triggerContext)));
             taskMap.put(taskName, future);
             log.info("定时任务开启成功");
         }
     }
+
     public synchronized void stopCron(String taskName) {
         ScheduledFuture<?> future = taskMap.get(taskName);
         if (future != null) {

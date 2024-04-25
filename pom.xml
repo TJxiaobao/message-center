@@ -16,6 +16,7 @@
     <modules>
         <module>message-job</module>
         <module>message-srv</module>
+        <module>message-common</module>
     </modules>
 
 
@@ -103,6 +104,12 @@
                 <version>${project.version}</version>
             </dependency>
 
+
+            <dependency>
+                <groupId>com.message.common</groupId>
+                <artifactId>message-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>

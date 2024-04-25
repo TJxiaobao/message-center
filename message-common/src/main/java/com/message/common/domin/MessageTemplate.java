@@ -1,4 +1,4 @@
-package com.message.messagesrv.domin;
+package com.message.common.domin;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;

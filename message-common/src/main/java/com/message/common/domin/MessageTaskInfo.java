@@ -1,10 +1,20 @@
-package com.message.job.domin.bo;
+package com.message.common.domin;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+/**
+ * 消息任务信息
+ */
 @Data
-public class MessageTaskInfoBo {
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName(value = "message_task_info")
+public class MessageTaskInfo {
 
+    private Long id;
 
     /**
      * 消息任务 ID
@@ -14,7 +24,7 @@ public class MessageTaskInfoBo {
     /**
      * 消息任务类型
      */
-    private String  messageTaskType;
+    private String messageTaskType;
 
     /**
      * 任务状态 0 未发送, 1 发送中, 2 发送成功, 3 发送失败

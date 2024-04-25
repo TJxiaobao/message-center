@@ -1,7 +1,8 @@
-package com.message.messagesrv.mapper;
+package com.message.common.mapper;
+
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.message.messagesrv.domin.MessageTemplate;
+import com.message.common.domin.MessageTemplate;
 
 public interface MessageTemplateMapper extends BaseMapper<MessageTemplate> {
 }

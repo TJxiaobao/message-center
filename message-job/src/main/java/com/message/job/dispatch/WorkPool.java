@@ -1,10 +1,15 @@
 package com.message.job.dispatch;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.stereotype.Component;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import java.util.concurrent.*;
+
+import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 @Component
 @Slf4j
@@ -26,7 +31,7 @@ public class WorkPool implements DisposableBean {
                 .setDaemon(true)
                 .setNameFormat("send-work-%d")
                 .build();
-        workExecutor = new ThreadPoolExecutor( Runtime.getRuntime().availableProcessors(),
+        workExecutor = new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors(),
                 1024,
                 10,
                 TimeUnit.SECONDS,
@@ -34,6 +39,7 @@ public class WorkPool implements DisposableBean {
                 threadFactory,
                 new ThreadPoolExecutor.AbortPolicy());
     }
+
     public void executeJob(Runnable runnable) throws RejectedExecutionException {
         workExecutor.execute(runnable);
     }

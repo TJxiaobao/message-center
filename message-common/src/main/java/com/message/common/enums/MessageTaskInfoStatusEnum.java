@@ -1,4 +1,4 @@
-package com.message.job.enums;
+package com.message.common.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

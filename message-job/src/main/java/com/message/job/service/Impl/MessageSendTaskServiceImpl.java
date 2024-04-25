@@ -1,15 +1,15 @@
 package com.message.job.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.message.job.config.MessageTaskScheduleConfig;
+import com.message.common.domin.MessageRecord;
+import com.message.common.domin.MessageTaskInfo;
+import com.message.common.domin.MessageTaskScheduleConfig;
+import com.message.common.enums.MessageTaskInfoStatusEnum;
+import com.message.common.mapper.MessageRecordMapper;
+import com.message.common.mapper.MessageTaskInfoMapper;
 import com.message.job.dispatch.WorkPool;
-import com.message.job.domin.MessageTaskInfo;
-import com.message.job.enums.MessageTaskInfoStatusEnum;
-import com.message.job.mapper.MessageTaskInfoMapper;
 import com.message.job.service.MessageSendTaskService;
 import com.message.job.task.AsyncExecute;
-import com.message.messagesrv.domin.MessageRecord;
-import com.message.messagesrv.mapper.MessageRecordMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
