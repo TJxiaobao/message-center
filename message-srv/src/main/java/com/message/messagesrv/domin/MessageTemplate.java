@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @TableName(value = "message_template")
-public class messageTemplate {
+public class MessageTemplate {
 
     private Long id;
 

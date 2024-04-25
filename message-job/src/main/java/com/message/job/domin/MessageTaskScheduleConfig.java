@@ -8,7 +8,7 @@ import lombok.Data;
  */
 @Data
 @TableName(value = "message_task_schedule_config")
-public class messageTaskScheduleConfig {
+public class MessageTaskScheduleConfig {
 
     private Long id;
 

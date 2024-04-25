@@ -45,6 +45,8 @@
         <commons-text.version>1.10.0</commons-text.version>
         <commonmark.version>0.15.2</commonmark.version>
         <json.version>20220320</json.version>
+        <redisson-spring-boot-starter.version>3.24.1</redisson-spring-boot-starter.version>
+        <kryo.version>5.5.0</kryo.version>
     </properties>
 
     <dependencyManagement>
@@ -136,6 +138,26 @@
                 <groupId>org.json</groupId>
                 <artifactId>json</artifactId>
                 <version>${json.version}</version>
+            </dependency>
+
+            <!--提供redis分布式锁-->
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson-spring-boot-starter.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.esotericsoftware</groupId>
+                        <artifactId>kryo</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>com.esotericsoftware</groupId>
+                <artifactId>kryo</artifactId>
+                <version>${kryo.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

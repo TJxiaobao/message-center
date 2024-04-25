@@ -8,7 +8,7 @@ import lombok.Data;
  */
 @Data
 @TableName(value = "message_task_info")
-public class messageTaskInfo {
+public class MessageTaskInfo {
 
     private Long id;
 

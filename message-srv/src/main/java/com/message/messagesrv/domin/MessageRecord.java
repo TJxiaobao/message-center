@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @TableName(value = "message_record")
-public class messageRecord {
+public class MessageRecord {
 
     private Long id;
 
