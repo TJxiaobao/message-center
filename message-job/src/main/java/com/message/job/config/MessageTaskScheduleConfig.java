@@ -28,6 +28,11 @@ public class MessageTaskScheduleConfig {
     private int maxRetryNum;
 
     /**
+     * 重试间隔
+     */
+    private int retryInterval;
+
+    /**
      * 创建时间
      */
     private Long createTime;
