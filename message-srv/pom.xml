@@ -28,7 +28,10 @@
             <scope>test</scope>
         </dependency>
 
-
+        <dependency>
+            <groupId>com.message.common</groupId>
+            <artifactId>message-common</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.dromara.sms4j</groupId>
             <artifactId>sms4j-spring-boot-starter</artifactId>
