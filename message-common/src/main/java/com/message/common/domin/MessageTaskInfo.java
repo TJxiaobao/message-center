@@ -14,17 +14,26 @@ import lombok.NoArgsConstructor;
 @TableName(value = "message_task_info")
 public class MessageTaskInfo {
 
-    private Long id;
-
     /**
      * 消息任务 ID
      */
-    private String messageTaskId;
+    private Long id;
 
     /**
-     * 消息任务类型
+     * 业务Id
      */
-    private String messageTaskType;
+    private String bizId;
+
+    /**
+     * 消息类型 0 邮件, 1 阿里云短信, 2 腾讯云短信.....
+     */
+    private int msgTaskType;
+
+    /**
+     * 业务类型
+     */
+    private int bizType;
+
 
     /**
      * 任务状态 0 未发送, 1 发送中, 2 发送成功, 3 发送失败
@@ -45,6 +54,26 @@ public class MessageTaskInfo {
      * 重试间隔
      */
     private int retryInterval;
+
+    /**
+     * 邮件标题
+     */
+    private String title;
+
+    /**
+     * 邮件内容
+     */
+    private String Content;
+
+    /**
+     * 邮件接受人
+     */
+    private String receiver;
+
+    /**
+     * 模版ID
+     */
+    private String templateId;
 
     /**
      * 创建时间

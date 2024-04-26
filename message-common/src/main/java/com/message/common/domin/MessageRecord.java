@@ -35,29 +35,19 @@ public class MessageRecord {
     private String title;
 
     /**
-     * 邮件内容
+     * message 内容
      */
     private String Content;
 
     /**
-     * 优先级
-     */
-    private int priority;
-
-    /**
-     * 邮件接受人
-     */
-    private String receiver;
-
-    /**
-     * 邮件状态
+     * message 状态
      */
     private int status;
 
     /**
-     * 模版ID
+     * 失败消息
      */
-    private String templateId;
+    private String failContext;
 
     /**
      * 创建时间

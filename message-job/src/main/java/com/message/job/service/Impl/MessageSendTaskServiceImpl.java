@@ -23,8 +23,6 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
 
     private final MessageTaskInfoMapper messageTaskInfoMapper;
 
-    private final MessageRecordMapper messageRecordMapper;
-
     private final MessageTaskScheduleConfig config;
 
     private final WorkPool workPool;
@@ -40,13 +38,9 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
         queryWrapper.eq(MessageTaskInfo::getStatus, MessageTaskInfoStatusEnum.STATUS_ENUM_NO_SEND.getStatusCode())
                 .last("LIMIT " + limit);
         List<MessageTaskInfo> messageTaskInfos = messageTaskInfoMapper.selectList(queryWrapper);
-        Set<String> collect = messageTaskInfos.stream().map(MessageTaskInfo::getMessageTaskId).collect(Collectors.toSet());
-        LambdaQueryWrapper<MessageRecord> messageRecordLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        messageRecordLambdaQueryWrapper.like(MessageRecord::getMessageTaskId, collect);
-        List<MessageRecord> tasks = messageRecordMapper.selectList(messageRecordLambdaQueryWrapper);
 
         // 执行任务
-        for (MessageRecord task : tasks) {
+        for (MessageTaskInfo task : messageTaskInfos) {
             workPool.executeJob(new AsyncExecute(task));
         }
     }
