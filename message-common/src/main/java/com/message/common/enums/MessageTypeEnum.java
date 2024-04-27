@@ -8,7 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum MessageTypeEnum {
 
-    ALIBABA_SMS(0, "ali_sms", "阿里短信"),
+    SMS(0, "sms", "短信"),
 
     EMAIL(10, "email", "邮件");
 

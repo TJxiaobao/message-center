@@ -15,7 +15,6 @@ public class MessageTaskConfig {
     @Bean("messageTaskScheduleConfig")
     public MessageTaskScheduleConfig messageTaskScheduleConfig() {
         MessageTaskScheduleConfig messageTaskScheduleConfig = configMapper.selectOne(null);
-        System.out.println(messageTaskScheduleConfig.toString());
         return messageTaskScheduleConfig;
     }
 

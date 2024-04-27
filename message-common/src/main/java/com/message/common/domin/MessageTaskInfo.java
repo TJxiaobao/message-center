@@ -34,7 +34,6 @@ public class MessageTaskInfo {
      */
     private int bizType;
 
-
     /**
      * 任务状态 0 未发送, 1 发送中, 2 发送成功, 3 发送失败
      */
@@ -73,7 +72,7 @@ public class MessageTaskInfo {
     /**
      * 模版ID
      */
-    private String templateId;
+    private String configId;
 
     /**
      * 创建时间

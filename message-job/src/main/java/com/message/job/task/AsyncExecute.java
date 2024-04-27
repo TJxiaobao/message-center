@@ -1,6 +1,5 @@
 package com.message.job.task;
 
-import com.message.common.domin.MessageRecord;
 import com.message.common.domin.MessageTaskInfo;
 import com.message.common.enums.MessageTaskInfoStatusEnum;
 import com.message.common.enums.MessageTypeEnum;
@@ -34,19 +33,27 @@ public class AsyncExecute implements Runnable {
 
     public void send(MessageTaskInfo messageTaskInfo) {
         // todo 实现发送业务
-        if (MessageTypeEnum.ALIBABA_SMS.getStatusCode() == messageTaskInfo.getMsgTaskType()) {
-            sendSms(MessageTypeEnum.ALIBABA_SMS.getStatusName());
+        if (MessageTypeEnum.SMS.getStatusCode() == messageTaskInfo.getMsgTaskType()) {
+            sendSms(messageTaskInfo.getConfigId());
         } else if (MessageTypeEnum.EMAIL.getStatusCode() == messageTaskInfo.getMsgTaskType()) {
             // 发送邮件业务
         }
         // todo 更多消息业务
     }
 
-    public void sendSms(String configId) {
-        SmsBlend smsBlend = SmsFactory.getSmsBlend(configId);
-        SmsResponse smsResponse = smsBlend.sendMessage(messageTaskInfo.getReceiver(), messageTaskInfo.getContent());
-        if (smsResponse.isSuccess()) {
-            messageTaskInfo.setStatus(MessageTaskInfoStatusEnum.STATUS_ENUM_SEND_SUCCESS.getStatusCode());
+    private void sendSms(String configId) {
+        for (int i = 1; i <= messageTaskInfo.getCrtRetryNum(); i++) {
+            SmsBlend smsBlend = SmsFactory.getSmsBlend(configId);
+            SmsResponse smsResponse = smsBlend.sendMessage(messageTaskInfo.getReceiver(), messageTaskInfo.getContent());
+            if (smsResponse.isSuccess()) {
+                // todo 计算重试了基础然后刷库 （是否先放到一个List里面，然后进行一个统一刷库）
+                break;
+            }
         }
     }
+
+    private void sendEmail() {
+        // todo 实现邮件发送
+    }
+
 }
