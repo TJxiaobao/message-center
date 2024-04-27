@@ -2,47 +2,46 @@ package com.message.common.domin.bo;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class MessageTaskInfoBo {
 
 
     /**
-     * 消息任务 ID
+     *  message 标题
      */
-    private String messageTaskId;
+    private String title;
+
+    /**
+     * message 内容
+     */
+    private String Content;
+
+    /**
+     * message 接受人
+     */
+    private List<String> receiver;
+
+    /**
+     * 模版 ID (sms 需要选择)
+     */
+    private String configId;
 
     /**
      * 消息任务类型
      */
-    private String messageTaskType;
+    private List<String> messageType;
+
 
     /**
-     * 任务状态 0 未发送, 1 发送中, 2 发送成功, 3 发送失败
-     */
-    private int status;
-
-    /**
-     * 最大重试次数
+     * 最大重试次数 (可选)
      */
     private int maxRetryNum;
 
     /**
-     * 已经重试次数
-     */
-    private int crtRetryNum;
-
-    /**
-     * 重试间隔
+     * 重试间隔（可选）
      */
     private int retryInterval;
 
-    /**
-     * 创建时间
-     */
-    private Long createTime;
-
-    /**
-     * 更新时间
-     */
-    private Long updateTime;
 }

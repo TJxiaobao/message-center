@@ -70,7 +70,7 @@ public class MessageTaskInfo {
     private String receiver;
 
     /**
-     * 模版ID
+     * 配置 ID
      */
     private String configId;
 

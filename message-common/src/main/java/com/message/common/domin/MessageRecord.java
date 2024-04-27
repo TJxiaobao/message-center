@@ -30,7 +30,7 @@ public class MessageRecord {
     private int msgType;
 
     /**
-     * 邮件标题
+     * message 标题
      */
     private String title;
 

@@ -43,6 +43,8 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
         for (MessageTaskInfo task : messageTaskInfos) {
             workPool.executeJob(new AsyncExecute(task));
         }
+
+        // 任务信息刷库
     }
 
     @Override
