@@ -1,9 +1,7 @@
 package com.message.job.config;
 
 import com.message.common.domin.MessageTaskScheduleConfig;
-import com.message.common.domin.SmsConfig;
 import com.message.common.mapper.MessageTaskScheduleConfigMapper;
-import com.message.common.mapper.SmsConfigMapper;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;

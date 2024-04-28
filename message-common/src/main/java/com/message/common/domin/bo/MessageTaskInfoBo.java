@@ -9,7 +9,7 @@ public class MessageTaskInfoBo {
 
 
     /**
-     *  message 标题
+     * message 标题
      */
     private String title;
 

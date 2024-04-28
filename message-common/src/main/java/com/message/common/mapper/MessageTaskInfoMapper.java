@@ -4,6 +4,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.message.common.domin.MessageTaskInfo;
 import org.apache.ibatis.annotations.Mapper;
 
-//@Mapper
+@Mapper
 public interface MessageTaskInfoMapper extends BaseMapper<MessageTaskInfo> {
 }

@@ -18,7 +18,7 @@ public class ReadConfig implements SmsReadConfig {
     public BaseConfig getSupplierConfig(String configId) {
         //这里需要注意，UniConfig只是代表合一短信的配置类，仅做示例使用，根据不同厂商选择实例化不同的配置类
         UniConfig uniConfig = new UniConfig();
-       //此处仅为示例，实际环境中，数据可以来自任意位置，
+        //此处仅为示例，实际环境中，数据可以来自任意位置，
         return uniConfig;
     }
 

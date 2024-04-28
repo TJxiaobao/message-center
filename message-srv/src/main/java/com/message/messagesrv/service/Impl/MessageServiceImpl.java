@@ -39,6 +39,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageTaskInfoMapper, Messa
 
     /**
      * 获取类型 code
+     *
      * @param msgTypeString msgType String
      * @return code
      */

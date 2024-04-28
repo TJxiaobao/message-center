@@ -1,17 +1,23 @@
 package com.message.job.task;
 
 import com.message.common.domin.MessageTaskInfo;
-import com.message.common.enums.MessageTaskInfoStatusEnum;
+import com.message.common.domin.bo.EmailInfoBo;
 import com.message.common.enums.MessageTypeEnum;
+import com.message.job.service.EmailService;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.sms4j.api.SmsBlend;
 import org.dromara.sms4j.api.entity.SmsResponse;
 import org.dromara.sms4j.core.factory.SmsFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class AsyncExecute implements Runnable {
 
     private MessageTaskInfo messageTaskInfo;
+    @Autowired
+    private EmailService emailService;
 
     public AsyncExecute() {
     }
@@ -37,6 +43,7 @@ public class AsyncExecute implements Runnable {
             sendSms(messageTaskInfo.getConfigId());
         } else if (MessageTypeEnum.EMAIL.getStatusCode() == messageTaskInfo.getMsgTaskType()) {
             // 发送邮件业务
+            sendEmail();
         }
         // todo 更多消息业务
     }
@@ -54,6 +61,20 @@ public class AsyncExecute implements Runnable {
 
     private void sendEmail() {
         // todo 实现邮件发送
+        for (int i = 1; i <= messageTaskInfo.getCrtRetryNum(); i++) {
+            //1.获取config对应的实例
+            EmailInfoBo emailInfoBo = new EmailInfoBo();
+            emailInfoBo.setSubject(messageTaskInfo.getTitle());
+            emailInfoBo.setContent(messageTaskInfo.getContent());
+            //TODO 这里设置,分割接收人邮箱地址
+            emailInfoBo.setTo(messageTaskInfo.getReceiver().split(","));
+            emailService.sendEmail(messageTaskInfo.getConfigId(), emailInfoBo);
+            //2.通过实例进行消息发送
+            if (true) {
+                // todo 计算重试了基础然后刷库 （是否先放到一个List里面，然后进行一个统一刷库）
+                break;
+            }
+        }
     }
 
 }

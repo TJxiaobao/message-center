@@ -5,10 +5,8 @@ import com.message.common.mapper.SmsConfigMapper;
 import com.message.job.utils.ConfigMapUtils;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
