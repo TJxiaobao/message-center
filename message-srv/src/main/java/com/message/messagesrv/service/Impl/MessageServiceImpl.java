@@ -9,6 +9,7 @@ import com.message.common.mapper.MessageTaskInfoMapper;
 import com.message.messagesrv.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
@@ -20,21 +21,24 @@ public class MessageServiceImpl extends ServiceImpl<MessageTaskInfoMapper, Messa
     private final MessageTaskInfoMapper messageTaskInfoMapper;
 
     @Override
+    @Transactional
     public Boolean addMsg(MessageTaskInfoBo messageTaskInfoBo) {
         ArrayList<MessageTaskInfo> messageTaskInfos = new ArrayList<>();
-        for (String receiver : messageTaskInfoBo.getReceiver()) {
-            for (String msgType : messageTaskInfoBo.getMessageType()) {
-                MessageTaskInfo messageTaskInfo = new MessageTaskInfo();
-                messageTaskInfo.setReceiver(receiver);
-                messageTaskInfo.setMsgTaskType(getMsgTypeCode(msgType));
-                BeanUtil.copyProperties(messageTaskInfoBo, messageTaskInfo);
-                messageTaskInfos.add(messageTaskInfo);
-            }
+        StringBuilder receiver = new StringBuilder();
+        messageTaskInfoBo.getReceiver().forEach(l -> receiver.append(l).append(","));
+        String receiverStr = receiver.substring(0, receiver.length() - 1);
+
+        for (String msgType : messageTaskInfoBo.getMessageType()) {
+            MessageTaskInfo messageTaskInfo = new MessageTaskInfo();
+            messageTaskInfo.setReceiver(receiverStr);
+            messageTaskInfo.setMsgTaskType(getMsgTypeCode(msgType));
+            BeanUtil.copyProperties(messageTaskInfoBo, messageTaskInfo);
+            messageTaskInfos.add(messageTaskInfo);
         }
 
         // 任务进行保存 todo
         // messageTaskInfoMapper.i
-        return true;
+        return this.saveBatch(messageTaskInfos);
     }
 
     /**
