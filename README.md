@@ -6,3 +6,5 @@
 
     开发中
 
+系统架构图：
+![](./doc/images/system_architecture.png)
