@@ -1,5 +1,6 @@
 package com.message.job.service.Impl;
 
+import com.message.common.domin.MessageTaskInfo;
 import com.message.common.domin.bo.EmailInfoBo;
 import com.message.job.config.MailSenderConfig;
 import com.message.job.service.EmailService;
@@ -18,7 +19,7 @@ public class EmailServiceImpl implements EmailService {
     MailSenderConfig senderConfig;
 
     @Override
-    public void sendEmail(String configId, EmailInfoBo emailInfoBo) {
+    public void sendEmail(String configId, MessageTaskInfo messageTaskInfo) {
         JavaMailSenderImpl mailSender = senderConfig.getSender(configId);
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
@@ -26,10 +27,10 @@ public class EmailServiceImpl implements EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
             helper.setFrom(Objects.requireNonNull(mailSender.getUsername()));
-            helper.setTo(emailInfoBo.getTo());
+            helper.setTo(messageTaskInfo.getReceiver().split(","));
 //            helper.setFrom("");
-            helper.setSubject(emailInfoBo.getSubject());
-            helper.setText(emailInfoBo.getContent(), true);
+            helper.setSubject(messageTaskInfo.getTitle());
+            helper.setText(messageTaskInfo.getContent(), true);
             mailSender.send(mimeMessage);
         } catch (javax.mail.MessagingException e) {
             e.printStackTrace();
