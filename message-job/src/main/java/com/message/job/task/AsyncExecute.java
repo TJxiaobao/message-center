@@ -1,9 +1,8 @@
 package com.message.job.task;
 
 import com.message.common.domin.MessageTaskInfo;
-import com.message.common.domin.bo.EmailInfoBo;
 import com.message.common.enums.MessageTypeEnum;
-import com.message.job.service.EmailService;
+import com.message.job.service.MessageSendTaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.sms4j.api.SmsBlend;
 import org.dromara.sms4j.api.entity.SmsResponse;
@@ -16,8 +15,7 @@ import org.springframework.stereotype.Component;
 public class AsyncExecute implements Runnable {
 
     private MessageTaskInfo messageTaskInfo;
-    @Autowired
-    private EmailService emailService;
+    private MessageSendTaskService messageSendTaskService;
 
     public AsyncExecute() {
     }
@@ -62,13 +60,7 @@ public class AsyncExecute implements Runnable {
     private void sendEmail() {
         // todo 实现邮件发送
         for (int i = 1; i <= messageTaskInfo.getCrtRetryNum(); i++) {
-            //1.获取config对应的实例
-            EmailInfoBo emailInfoBo = new EmailInfoBo();
-            emailInfoBo.setSubject(messageTaskInfo.getTitle());
-            emailInfoBo.setContent(messageTaskInfo.getContent());
-            //TODO 这里设置,分割接收人邮箱地址
-            emailInfoBo.setTo(messageTaskInfo.getReceiver().split(","));
-            emailService.sendEmail(messageTaskInfo.getConfigId(), emailInfoBo);
+            messageSendTaskService.sendEmail(messageTaskInfo.getConfigId(), messageTaskInfo);
             //2.通过实例进行消息发送
             if (true) {
                 // todo 计算重试了基础然后刷库 （是否先放到一个List里面，然后进行一个统一刷库）
