@@ -1,5 +1,6 @@
 package com.message.common.domin;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -7,6 +8,7 @@ import lombok.Data;
 @TableName(value = "message_record")
 public class MessageRecord {
 
+    @TableId(value = "id")
     private Long id;
 
     /**
@@ -19,10 +21,10 @@ public class MessageRecord {
      */
     private int bizType;
 
-    /**
-     * 消息任务 ID
-     */
-    private String messageTaskId;
+//    /**
+//     * 消息任务 ID
+//     */
+//    private String messageTaskId;
 
     /**
      * 消息类型 0 邮件, 1 阿里云短信, 2 腾讯云短信.....
