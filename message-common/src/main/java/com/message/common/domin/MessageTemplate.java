@@ -9,15 +9,20 @@ public class MessageTemplate {
 
     private Long id;
 
-    /**
-     * 模版 ID
-     */
-    private String messageTemplateId;
+//    /**
+//     * 模版 ID
+//     */
+//    private String messageTemplateId;
 
     /**
      * 模版名称
      */
     private String templateName;
+
+    /**
+     * 模版配置
+     */
+    private String content;
 
     /**
      * 状态 0 启用 2 禁用

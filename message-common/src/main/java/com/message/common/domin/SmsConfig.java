@@ -1,5 +1,6 @@
 package com.message.common.domin;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,12 +12,16 @@ import lombok.NoArgsConstructor;
 @TableName(value = "sms_config")
 public class SmsConfig {
 
-    private Long id;
-
     /**
      * 配置 ID
      */
-    private String configId;
+    @TableId(value = "id")
+    private Long id;
+
+//    /**
+//     * 配置 ID
+//     */
+//    private String configId;
 
     /**
      * 运营商

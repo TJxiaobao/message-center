@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @TableName(value = "message_task_schedule_config")
 public class MessageTaskScheduleConfig {
 
-
     /**
      * 每次拉取任务数量
      */

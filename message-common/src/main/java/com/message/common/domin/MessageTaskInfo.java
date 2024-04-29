@@ -1,5 +1,6 @@
 package com.message.common.domin;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +18,7 @@ public class MessageTaskInfo {
     /**
      * 消息任务 ID
      */
+    @TableId(value = "id")
     private Long id;
 
     /**
