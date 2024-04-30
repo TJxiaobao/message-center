@@ -10,5 +10,5 @@ public interface MessageSendTaskService {
 
     Boolean addTaskInfo();
 
-    void sendEmail(String configId, MessageTaskInfo messageTaskInfo);
+    Boolean sendEmail(String configId, MessageTaskInfo messageTaskInfo);
 }
