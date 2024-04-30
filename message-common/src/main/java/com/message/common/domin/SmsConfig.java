@@ -18,10 +18,10 @@ public class SmsConfig {
     @TableId(value = "id")
     private Long id;
 
-//    /**
-//     * 配置 ID
-//     */
-//    private String configId;
+    /**
+     * 配置 ID
+     */
+    private String configId;
 
     /**
      * 运营商
