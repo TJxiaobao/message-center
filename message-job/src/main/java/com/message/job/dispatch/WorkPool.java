@@ -1,10 +1,13 @@
 package com.message.job.dispatch;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.message.common.domin.MessageTaskInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
@@ -42,6 +45,10 @@ public class WorkPool implements DisposableBean {
 
     public void executeJob(Runnable runnable) throws RejectedExecutionException {
         workExecutor.execute(runnable);
+    }
+
+    public Future<MessageTaskInfo> submitJob(Callable<MessageTaskInfo> callable) throws RejectedExecutionException {
+        return workExecutor.submit(callable);
     }
 
     @Override
