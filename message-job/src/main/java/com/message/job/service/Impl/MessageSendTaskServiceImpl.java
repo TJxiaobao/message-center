@@ -9,6 +9,7 @@ import com.message.common.enums.MessageTaskInfoStatusEnum;
 import com.message.common.mapper.MessageTaskInfoMapper;
 import com.message.job.config.MailSenderConfig;
 import com.message.job.dispatch.WorkPool;
+import com.message.job.service.MessageRecordService;
 import com.message.job.service.MessageSendTaskService;
 import com.message.job.task.AsyncExecute;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ import java.util.concurrent.Future;
 public class MessageSendTaskServiceImpl implements MessageSendTaskService {
 
     private final MessageTaskInfoMapper messageTaskInfoMapper;
+    private final MessageRecordService messageRecordService;
 
     private final MessageTaskScheduleConfig config;
 
@@ -69,6 +71,7 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
                 e.printStackTrace();
             }
         }
+        messageRecordService.saveBatch(allMessageTaskInfos);
     }
 
 

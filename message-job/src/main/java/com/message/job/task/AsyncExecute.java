@@ -3,6 +3,7 @@ package com.message.job.task;
 import com.message.common.domin.MessageTaskInfo;
 import com.message.common.enums.MessageTaskInfoStatusEnum;
 import com.message.common.enums.MessageTypeEnum;
+import com.message.job.service.MessageRecordService;
 import com.message.job.service.MessageSendTaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.sms4j.api.SmsBlend;

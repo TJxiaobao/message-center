@@ -1,4 +1,4 @@
-package com.message.messagesrv.service;
+package com.message.job.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.message.common.domin.MessageRecord;
