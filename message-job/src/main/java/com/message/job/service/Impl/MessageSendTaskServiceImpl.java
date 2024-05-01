@@ -56,22 +56,23 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
             Future<MessageTaskInfo> messageTaskInfoFuture = workPool.submitJob(new AsyncExecute(task));
             futures.add(messageTaskInfoFuture);
         }
-        ArrayList<MessageRecord> allMessageTaskInfos = new ArrayList<>();
+
         // 任务信息刷库
         // 遍历futures列表
+        ArrayList<MessageRecord> messageRecords = new ArrayList<>();
         for (Future<MessageTaskInfo> future : futures) {
             try {
                 // 获取异步执行的结果，设置最大等待时间为1秒
                 MessageTaskInfo messageTaskInfo = future.get();
                 MessageRecord messageRecord = BeanUtil.copyProperties(messageTaskInfo, MessageRecord.class);
                 // 将MessageTaskInfo对象添加到新列表中
-                allMessageTaskInfos.add(messageRecord);
+                messageRecords.add(messageRecord);
             } catch (InterruptedException | ExecutionException e) {
                 // 处理异常情况
                 e.printStackTrace();
             }
         }
-        messageRecordService.saveBatch(allMessageTaskInfos);
+        messageRecordService.saveBatch(messageRecords);
     }
 
 

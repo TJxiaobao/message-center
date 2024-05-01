@@ -57,17 +57,17 @@ public class MessageTaskInfo {
     private int retryInterval;
 
     /**
-     * 邮件标题
+     * message 标题
      */
     private String title;
 
     /**
-     * 邮件内容
+     * message 内容
      */
     private String Content;
 
     /**
-     * 邮件接受人
+     * message 接受人
      */
     private String receiver;
 

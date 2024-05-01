@@ -18,6 +18,7 @@ import java.util.concurrent.Callable;
 public class AsyncExecute implements Callable<MessageTaskInfo> {
 
     private MessageTaskInfo messageTaskInfo;
+
     private MessageSendTaskService messageSendTaskService;
 
     public AsyncExecute() {
@@ -59,7 +60,6 @@ public class AsyncExecute implements Callable<MessageTaskInfo> {
             SmsResponse smsResponse = smsBlend.sendMessage(messageTaskInfo.getReceiver(), messageTaskInfo.getContent());
             crtRetryNum++;
             if (smsResponse.isSuccess()) {
-                // todo 计算重试了基础然后刷库 （是否先放到一个List里面，然后进行一个统一刷库）
                 messageTaskInfo.setCrtRetryNum(crtRetryNum);
                 messageTaskInfo.setStatus(MessageTaskInfoStatusEnum.STATUS_ENUM_SEND_SUCCESS.getStatusCode());
                 return;
@@ -77,7 +77,6 @@ public class AsyncExecute implements Callable<MessageTaskInfo> {
             crtRetryNum++;
             //2.通过实例进行消息发送
             if (status) {
-                // todo 计算重试了基础然后刷库 （是否先放到一个List里面，然后进行一个统一刷库）
                 messageTaskInfo.setCrtRetryNum(crtRetryNum);
                 messageTaskInfo.setStatus(MessageTaskInfoStatusEnum.STATUS_ENUM_SEND_SUCCESS.getStatusCode());
                 return;
