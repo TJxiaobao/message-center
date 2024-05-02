@@ -13,6 +13,8 @@ import com.message.job.service.MessageRecordService;
 import com.message.job.service.MessageSendTaskService;
 import com.message.job.task.AsyncExecute;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,7 @@ import java.util.concurrent.Future;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MessageSendTaskServiceImpl implements MessageSendTaskService {
 
     private final MessageTaskInfoMapper messageTaskInfoMapper;
@@ -64,12 +67,13 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
             try {
                 // 获取异步执行的结果，设置最大等待时间为1秒
                 MessageTaskInfo messageTaskInfo = future.get();
-                MessageRecord messageRecord = BeanUtil.copyProperties(messageTaskInfo, MessageRecord.class);
+                MessageRecord messageRecord = new MessageRecord();
+                BeanUtils.copyProperties(messageTaskInfo, messageRecord);
                 // 将MessageTaskInfo对象添加到新列表中
                 messageRecords.add(messageRecord);
             } catch (InterruptedException | ExecutionException e) {
                 // 处理异常情况
-                e.printStackTrace();
+                log.error("MessageTaskInfo execute error: {}", e.getMessage());
             }
         }
         messageRecordService.saveBatch(messageRecords);
@@ -97,7 +101,7 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
             mailSender.send(mimeMessage);
             return true;
         } catch (javax.mail.MessagingException e) {
-            e.printStackTrace();
+            log.error("send email error: {}", e.getMessage());
         }
         return false;
     }
