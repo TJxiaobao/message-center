@@ -67,7 +67,6 @@ public class AsyncExecute implements Callable<MessageTaskInfo> {
         }
         messageTaskInfo.setCrtRetryNum(crtRetryNum);
         messageTaskInfo.setStatus(MessageTaskInfoStatusEnum.STATUS_ENUM_SEND_FAIL.getStatusCode());
-
     }
 
     private void sendEmail() {
