@@ -1,6 +1,5 @@
 package com.message.job.service;
 
-import com.message.common.domin.MessageTaskInfo;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,5 +9,4 @@ public interface MessageSendTaskService {
 
     Boolean addTaskInfo();
 
-    Boolean sendEmail(String configId, MessageTaskInfo messageTaskInfo);
 }
