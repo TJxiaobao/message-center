@@ -2,10 +2,15 @@ package com.message.job.task.strategy;
 
 import com.message.job.task.type.AbstractSend;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
 import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Configuration
+@Order(value = Ordered.HIGHEST_PRECEDENCE + 1)
 public class SendStrategyFactory implements CommandLineRunner {
 
     /**
