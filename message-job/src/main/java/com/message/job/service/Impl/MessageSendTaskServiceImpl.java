@@ -1,6 +1,5 @@
 package com.message.job.service.Impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.message.common.domin.MessageRecord;
 import com.message.common.domin.MessageTaskInfo;
@@ -15,14 +14,10 @@ import com.message.job.task.AsyncExecute;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -85,24 +80,4 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
         return null;
     }
 
-    @Override
-    public Boolean sendEmail(String configId, MessageTaskInfo messageTaskInfo) {
-        JavaMailSenderImpl mailSender = senderConfig.getSender(configId);
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-
-        try {
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-
-            helper.setFrom(Objects.requireNonNull(mailSender.getUsername()));
-            helper.setTo(messageTaskInfo.getReceiver().split(","));
-//            helper.setFrom("");
-            helper.setSubject(messageTaskInfo.getTitle());
-            helper.setText(messageTaskInfo.getContent(), true);
-            mailSender.send(mimeMessage);
-            return true;
-        } catch (javax.mail.MessagingException e) {
-            log.error("send email error: {}", e.getMessage());
-        }
-        return false;
-    }
 }
