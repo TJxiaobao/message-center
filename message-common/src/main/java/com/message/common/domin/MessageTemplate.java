@@ -9,11 +9,6 @@ public class MessageTemplate {
 
     private Long id;
 
-//    /**
-//     * 模版 ID
-//     */
-//    private String messageTemplateId;
-
     /**
      * 模版名称
      */
