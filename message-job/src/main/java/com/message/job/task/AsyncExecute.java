@@ -7,9 +7,6 @@ import com.message.job.service.MessageSendTaskService;
 import com.message.job.task.strategy.SendStrategyFactory;
 import com.message.job.task.type.AbstractSend;
 import lombok.extern.slf4j.Slf4j;
-import org.dromara.sms4j.api.SmsBlend;
-import org.dromara.sms4j.api.entity.SmsResponse;
-import org.dromara.sms4j.core.factory.SmsFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Callable;
@@ -45,7 +42,9 @@ public class AsyncExecute implements Callable<MessageTaskInfo> {
         messageTaskInfo.setCrtRetryNum(messageTaskInfo.getCrtRetryNum() + 1);
         messageTaskInfo.setStatus(MessageTaskInfoStatusEnum.STATUS_ENUM_SENDING.getStatusCode());
         if (MessageTypeEnum.SMS.getStatusCode() == messageTaskInfo.getMsgTaskType()) {
-            sendSms(messageTaskInfo.getConfigId());
+            String statusName = MessageTypeEnum.SMS.getStatusName();
+            AbstractSend sendSms = SendStrategyFactory.invoke(statusName);
+            sendSms.send(messageTaskInfo, messageTaskInfo.getConfigId());
         } else if (MessageTypeEnum.EMAIL.getStatusCode() == messageTaskInfo.getMsgTaskType()) {
             // 发送邮件业务
             String statusName = MessageTypeEnum.EMAIL.getStatusName();
@@ -55,21 +54,4 @@ public class AsyncExecute implements Callable<MessageTaskInfo> {
         // todo 更多消息业务
         return messageTaskInfo;
     }
-
-    private void sendSms(String configId) {
-        int crtRetryNum = messageTaskInfo.getCrtRetryNum();
-        for (int i = 1; i <= messageTaskInfo.getCrtRetryNum(); i++) {
-            SmsBlend smsBlend = SmsFactory.getSmsBlend(configId);
-            SmsResponse smsResponse = smsBlend.sendMessage(messageTaskInfo.getReceiver(), messageTaskInfo.getContent());
-            crtRetryNum++;
-            if (smsResponse.isSuccess()) {
-                messageTaskInfo.setCrtRetryNum(crtRetryNum);
-                messageTaskInfo.setStatus(MessageTaskInfoStatusEnum.STATUS_ENUM_SEND_SUCCESS.getStatusCode());
-                return;
-            }
-        }
-        messageTaskInfo.setCrtRetryNum(crtRetryNum);
-        messageTaskInfo.setStatus(MessageTaskInfoStatusEnum.STATUS_ENUM_SEND_FAIL.getStatusCode());
-    }
-
 }
