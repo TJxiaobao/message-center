@@ -41,17 +41,20 @@ public class AsyncExecute implements Callable<MessageTaskInfo> {
         // todo 实现发送业务
         messageTaskInfo.setCrtRetryNum(messageTaskInfo.getCrtRetryNum() + 1);
         messageTaskInfo.setStatus(MessageTaskInfoStatusEnum.STATUS_ENUM_SENDING.getStatusCode());
-        if (MessageTypeEnum.SMS.getStatusCode() == messageTaskInfo.getMsgTaskType()) {
-            String statusName = MessageTypeEnum.SMS.getStatusName();
-            AbstractSend sendSms = SendStrategyFactory.invoke(statusName);
-            sendSms.send(messageTaskInfo, messageTaskInfo.getConfigId());
-        } else if (MessageTypeEnum.EMAIL.getStatusCode() == messageTaskInfo.getMsgTaskType()) {
-            // 发送邮件业务
-            String statusName = MessageTypeEnum.EMAIL.getStatusName();
-            AbstractSend sendEmail = SendStrategyFactory.invoke(statusName);
-            sendEmail.send(messageTaskInfo, messageTaskInfo.getConfigId());
-        }
+        String statusName = getStatusName(messageTaskInfo.getMsgTaskType());
+        AbstractSend sendMessage = SendStrategyFactory.invoke(statusName);
+        sendMessage.send(messageTaskInfo, messageTaskInfo.getConfigId());
         // todo 更多消息业务
         return messageTaskInfo;
+    }
+
+    private String getStatusName(int type) {
+        if (MessageTypeEnum.SMS.getStatusCode() == type) {
+            return MessageTypeEnum.SMS.getStatusName();
+        } else if (MessageTypeEnum.EMAIL.getStatusCode() == type) {
+            return MessageTypeEnum.EMAIL.getStatusName();
+        } else {
+            return MessageTypeEnum.SMS.getStatusName();
+        }
     }
 }
