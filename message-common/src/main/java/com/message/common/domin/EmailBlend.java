@@ -10,6 +10,8 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmailBlend {
+
     private String configId;
+
     private JavaMailSenderImpl javaMailSender;
 }

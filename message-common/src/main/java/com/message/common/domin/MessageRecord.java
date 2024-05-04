@@ -21,11 +21,6 @@ public class MessageRecord {
      */
     private int bizType;
 
-//    /**
-//     * 消息任务 ID
-//     */
-//    private String messageTaskId;
-
     /**
      * 消息类型 0 邮件, 1 阿里云短信, 2 腾讯云短信.....
      */
