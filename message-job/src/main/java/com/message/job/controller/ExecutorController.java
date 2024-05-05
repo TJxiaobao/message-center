@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RestController
 @RequestMapping("/setting")
 public class ExecutorController {
-    private String cron = "0/3 * * * * ?";
+    private String cron = "0/30 * * * * ?";
 
     @Autowired
     private TaskSchedulerService taskSchedulerService;

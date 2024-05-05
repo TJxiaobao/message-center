@@ -17,7 +17,7 @@ import java.util.Objects;
 public class EmailSend extends AbstractSend {
 
     @Override
-    public void send(MessageTaskInfo messageTaskInfo, String configId) {
+    public MessageTaskInfo send(MessageTaskInfo messageTaskInfo, String configId) {
         int crtRetryNum = messageTaskInfo.getCrtRetryNum();
         for (int i = 1; i <= messageTaskInfo.getCrtRetryNum(); i++) {
             Boolean status = sendEmail(messageTaskInfo);
@@ -26,11 +26,12 @@ public class EmailSend extends AbstractSend {
             if (status) {
                 messageTaskInfo.setCrtRetryNum(crtRetryNum);
                 messageTaskInfo.setStatus(MessageTaskInfoStatusEnum.STATUS_ENUM_SEND_SUCCESS.getStatusCode());
-                return;
+                return messageTaskInfo;
             }
         }
         messageTaskInfo.setCrtRetryNum(crtRetryNum);
         messageTaskInfo.setStatus(MessageTaskInfoStatusEnum.STATUS_ENUM_SEND_FAIL.getStatusCode());
+        return messageTaskInfo;
     }
 
     @Override
@@ -46,7 +47,6 @@ public class EmailSend extends AbstractSend {
 
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-
             helper.setFrom(Objects.requireNonNull(mailSender.getUsername()));
             helper.setTo(messageTaskInfo.getReceiver().split(","));
 //            helper.setFrom("");

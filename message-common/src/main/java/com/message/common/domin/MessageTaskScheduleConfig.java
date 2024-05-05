@@ -17,7 +17,7 @@ public class MessageTaskScheduleConfig {
     /**
      * 每次拉取任务数量
      */
-    private int messageScheduleLimit = 10;
+    private int messageScheduleLimit = 2;
 
     /**
      * 最大重试次数

@@ -43,9 +43,9 @@ public class AsyncExecute implements Callable<MessageTaskInfo> {
         messageTaskInfo.setStatus(MessageTaskInfoStatusEnum.STATUS_ENUM_SENDING.getStatusCode());
         String statusName = getStatusName(messageTaskInfo.getMsgTaskType());
         AbstractSend sendMessage = SendStrategyFactory.invoke(statusName);
-        sendMessage.send(messageTaskInfo, messageTaskInfo.getConfigId());
+        MessageTaskInfo messageTaskInfoByUpdate = sendMessage.send(messageTaskInfo, messageTaskInfo.getConfigId());
         // todo 更多消息业务
-        return messageTaskInfo;
+        return messageTaskInfoByUpdate;
     }
 
     private String getStatusName(int type) {

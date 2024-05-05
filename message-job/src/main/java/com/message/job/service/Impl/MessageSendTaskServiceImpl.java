@@ -9,6 +9,7 @@ import com.message.common.mapper.MessageTaskInfoMapper;
 import com.message.job.dispatch.WorkPool;
 import com.message.job.service.MessageRecordService;
 import com.message.job.service.MessageSendTaskService;
+import com.message.job.service.MessageTaskInfoService;
 import com.message.job.task.AsyncExecute;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -25,14 +26,16 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
 
     private final MessageTaskInfoMapper messageTaskInfoMapper;
     private final MessageRecordService messageRecordService;
+    private final MessageTaskInfoService messageTaskInfoService;
 
     private MessageTaskScheduleConfig config;
 
     private final WorkPool workPool;
 
-    public MessageSendTaskServiceImpl(MessageTaskInfoMapper messageTaskInfoMapper, MessageRecordService messageRecordService, WorkPool workPool) {
+    public MessageSendTaskServiceImpl(MessageTaskInfoMapper messageTaskInfoMapper, MessageRecordService messageRecordService, MessageTaskInfoService messageTaskInfoService, WorkPool workPool) {
         this.messageTaskInfoMapper = messageTaskInfoMapper;
         this.messageRecordService = messageRecordService;
+        this.messageTaskInfoService = messageTaskInfoService;
         this.workPool = workPool;
         this.config = new MessageTaskScheduleConfig();
     }
@@ -62,19 +65,23 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
         // 任务信息刷库
         // 遍历futures列表
         ArrayList<MessageRecord> messageRecords = new ArrayList<>();
+        ArrayList<MessageTaskInfo> messageTaskInfosUpdate = new ArrayList<>();
         for (Future<MessageTaskInfo> future : futures) {
             try {
                 // 获取异步执行的结果，设置最大等待时间为1秒
                 MessageTaskInfo messageTaskInfo = future.get();
+                log.info("任务结果:" + messageTaskInfo);
                 MessageRecord messageRecord = new MessageRecord();
-                BeanUtils.copyProperties(messageTaskInfo, messageRecord);
+                BeanUtils.copyProperties(messageTaskInfo, messageRecord, "id");
                 // 将MessageTaskInfo对象添加到新列表中
                 messageRecords.add(messageRecord);
+                messageTaskInfosUpdate.add(messageTaskInfo);
             } catch (InterruptedException | ExecutionException e) {
                 // 处理异常情况
                 log.error("MessageTaskInfo execute error: {}", e.getMessage());
             }
         }
+        messageTaskInfoService.updateBatchById(messageTaskInfosUpdate);
         messageRecordService.saveBatch(messageRecords);
     }
 
