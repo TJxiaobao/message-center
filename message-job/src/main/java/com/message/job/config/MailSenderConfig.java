@@ -5,13 +5,11 @@ import com.message.common.domin.EmailBlend;
 import com.message.common.domin.EmailConfig;
 import com.message.common.mapper.EmailConfigMapper;
 import com.message.job.factory.EmailFactory;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
