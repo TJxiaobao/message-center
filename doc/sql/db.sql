@@ -1,5 +1,5 @@
 CREATE DATABASE message_job;
-
+use message_job;
 -- 创建email_config表
 CREATE TABLE email_config (
                               id BIGINT AUTO_INCREMENT COMMENT '配置ID',
