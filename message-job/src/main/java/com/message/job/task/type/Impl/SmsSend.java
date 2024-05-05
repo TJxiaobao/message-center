@@ -11,7 +11,7 @@ import org.dromara.sms4j.core.factory.SmsFactory;
 public class SmsSend extends AbstractSend {
 
     @Override
-    public void send(MessageTaskInfo messageTaskInfo, String configId) {
+    public MessageTaskInfo send(MessageTaskInfo messageTaskInfo, String configId) {
         int crtRetryNum = messageTaskInfo.getCrtRetryNum();
         for (int i = 1; i <= messageTaskInfo.getCrtRetryNum(); i++) {
             SmsBlend smsBlend = SmsFactory.getSmsBlend(configId);
@@ -20,11 +20,12 @@ public class SmsSend extends AbstractSend {
             if (smsResponse.isSuccess()) {
                 messageTaskInfo.setCrtRetryNum(crtRetryNum);
                 messageTaskInfo.setStatus(MessageTaskInfoStatusEnum.STATUS_ENUM_SEND_SUCCESS.getStatusCode());
-                return;
+                return messageTaskInfo;
             }
         }
         messageTaskInfo.setCrtRetryNum(crtRetryNum);
         messageTaskInfo.setStatus(MessageTaskInfoStatusEnum.STATUS_ENUM_SEND_FAIL.getStatusCode());
+        return messageTaskInfo;
     }
 
     @Override

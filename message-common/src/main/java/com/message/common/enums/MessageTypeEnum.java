@@ -8,9 +8,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum MessageTypeEnum {
 
-    SMS(0, "sms", "短信"),
+    EMAIL(0, "email", "邮件"),
+    SMS(10, "sms", "短信");
 
-    EMAIL(10, "email", "邮件");
 
     private final int statusCode;
 
