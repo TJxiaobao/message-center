@@ -34,7 +34,6 @@ public class ExecutorController {
             System.out.println(andIncrement);
             // 注意第二个参数不是线程的命名,这里是池化
             taskSchedulerService.startCronNewTask(cron, new ExecutorServiceThread(), "TaskMapKey-" + andIncrement);
-            taskSchedulerService.startCronNewTask(cron, new ExecutorServiceThread(), "TaskMapKey-" + andIncrement);
         }
         return Result.success("成功初始化" + len + "个定时线程", "累计已执行" + threadCount + "个线程");
     }

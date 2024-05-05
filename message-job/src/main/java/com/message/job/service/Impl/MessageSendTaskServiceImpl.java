@@ -10,7 +10,6 @@ import com.message.job.dispatch.WorkPool;
 import com.message.job.service.MessageRecordService;
 import com.message.job.service.MessageSendTaskService;
 import com.message.job.task.AsyncExecute;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -21,20 +20,27 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class MessageSendTaskServiceImpl implements MessageSendTaskService {
 
     private final MessageTaskInfoMapper messageTaskInfoMapper;
     private final MessageRecordService messageRecordService;
 
-    private final MessageTaskScheduleConfig config;
+    private MessageTaskScheduleConfig config;
 
     private final WorkPool workPool;
+
+    public MessageSendTaskServiceImpl(MessageTaskInfoMapper messageTaskInfoMapper, MessageRecordService messageRecordService, WorkPool workPool) {
+        this.messageTaskInfoMapper = messageTaskInfoMapper;
+        this.messageRecordService = messageRecordService;
+        this.workPool = workPool;
+        this.config = new MessageTaskScheduleConfig();
+    }
 
 
     @Override
     public void processMessageTasks() {
+        log.info("拉取一次任务");
         // 使用配置信息进行任务处理
         int limit = config.getMessageScheduleLimit();
         int maxRetry = config.getMaxRetryNum();
@@ -44,7 +50,7 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
         queryWrapper.eq(MessageTaskInfo::getStatus, MessageTaskInfoStatusEnum.STATUS_ENUM_NO_SEND.getStatusCode())
                 .last("LIMIT " + limit);
         List<MessageTaskInfo> messageTaskInfos = messageTaskInfoMapper.selectList(queryWrapper);
-
+        log.info("任务信息:" + messageTaskInfos);
 
         ArrayList<Future<MessageTaskInfo>> futures = new ArrayList<>();
         // 执行任务

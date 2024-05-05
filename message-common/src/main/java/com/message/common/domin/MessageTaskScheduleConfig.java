@@ -17,17 +17,17 @@ public class MessageTaskScheduleConfig {
     /**
      * 每次拉取任务数量
      */
-    private int messageScheduleLimit;
+    private int messageScheduleLimit = 10;
 
     /**
      * 最大重试次数
      */
-    private int maxRetryNum;
+    private int maxRetryNum = 2;
 
     /**
      * 重试间隔
      */
-    private int retryInterval;
+    private int retryInterval = 1;
 
     /**
      * 创建时间

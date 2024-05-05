@@ -26,12 +26,14 @@ public class MailSenderConfig implements ApplicationRunner {
 
     public void buildMailSender() {
         log.info("初始化mailSender");
-        List<EmailConfig> mails = mailMapper.selectList(new QueryWrapper<EmailConfig>().eq("state", 1));
+//        QueryWrapper<EmailConfig> state = new QueryWrapper<EmailConfig>().eq("state", 1);
+        QueryWrapper<EmailConfig> state = new QueryWrapper<EmailConfig>();
+        List<EmailConfig> mails = mailMapper.selectList(state);
 
         if (mails != null && !mails.isEmpty()) {
             mails.forEach(mail -> {
                 JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
-                javaMailSender.setDefaultEncoding(mail.getDefaultEncoding());
+//                javaMailSender.setDefaultEncoding(mail.getDefaultEncoding());
                 javaMailSender.setHost(mail.getHost());
                 javaMailSender.setPort(mail.getPort());
                 javaMailSender.setProtocol(mail.getProtocol());

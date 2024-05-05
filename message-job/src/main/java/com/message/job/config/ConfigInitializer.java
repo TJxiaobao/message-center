@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 public class ConfigInitializer implements ApplicationListener<ContextRefreshedEvent> {
     private final MessageTaskScheduleConfigMapper configMapper;
 
-    private final MessageTaskScheduleConfig config;
+    private MessageTaskScheduleConfig config;
 
-    public ConfigInitializer(MessageTaskScheduleConfigMapper configMapper, MessageTaskScheduleConfig config) {
+    public ConfigInitializer(MessageTaskScheduleConfigMapper configMapper) {
         this.configMapper = configMapper;
-        this.config = config;
+        this.config = new MessageTaskScheduleConfig();
     }
 
     @Override
@@ -30,4 +30,5 @@ public class ConfigInitializer implements ApplicationListener<ContextRefreshedEv
             config.setUpdateTime(dbConfig.getUpdateTime());
         }
     }
+
 }
