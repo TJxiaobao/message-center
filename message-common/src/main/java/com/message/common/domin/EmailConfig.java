@@ -40,7 +40,7 @@ public class EmailConfig {
     private Integer port;
 
     /**
-     *  协议
+     * 协议
      */
     private String protocol;
 
