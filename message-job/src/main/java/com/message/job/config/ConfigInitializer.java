@@ -3,6 +3,7 @@ package com.message.job.config;
 import com.message.common.domin.MessageTaskScheduleConfig;
 import com.message.common.mapper.MessageTaskScheduleConfigMapper;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class ConfigInitializer implements ApplicationListener<ContextRefreshedEvent> {
     private final MessageTaskScheduleConfigMapper configMapper;
 
-    private MessageTaskScheduleConfig config;
+    private final MessageTaskScheduleConfig config;
 
     public ConfigInitializer(MessageTaskScheduleConfigMapper configMapper) {
         this.configMapper = configMapper;
@@ -31,4 +32,8 @@ public class ConfigInitializer implements ApplicationListener<ContextRefreshedEv
         }
     }
 
+    @Bean
+    public MessageTaskScheduleConfig messageTaskScheduleConfig() {
+        return this.config;
+    }
 }

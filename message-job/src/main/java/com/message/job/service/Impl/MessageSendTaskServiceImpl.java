@@ -32,21 +32,21 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
 
     private final WorkPool workPool;
 
-    public MessageSendTaskServiceImpl(MessageTaskInfoMapper messageTaskInfoMapper, MessageRecordService messageRecordService, MessageTaskInfoService messageTaskInfoService, WorkPool workPool) {
+    public MessageSendTaskServiceImpl(MessageTaskInfoMapper messageTaskInfoMapper, MessageRecordService messageRecordService, MessageTaskInfoService messageTaskInfoService, MessageTaskScheduleConfig config, WorkPool workPool) {
         this.messageTaskInfoMapper = messageTaskInfoMapper;
         this.messageRecordService = messageRecordService;
         this.messageTaskInfoService = messageTaskInfoService;
         this.workPool = workPool;
-        this.config = new MessageTaskScheduleConfig();
+        this.config = config;
     }
 
 
     @Override
     public void processMessageTasks() {
-        log.info("拉取一次任务");
         // 使用配置信息进行任务处理
         int limit = config.getMessageScheduleLimit();
         int maxRetry = config.getMaxRetryNum();
+        log.info("拉取一次任务:\nlimit:" + limit + "\nmaxRetry:" + maxRetry);
 
         // 拉取任务
         LambdaQueryWrapper<MessageTaskInfo> queryWrapper = new LambdaQueryWrapper<>();
