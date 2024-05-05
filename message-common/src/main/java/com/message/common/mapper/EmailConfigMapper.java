@@ -5,6 +5,5 @@ import com.message.common.domin.EmailConfig;
 import org.apache.ibatis.annotations.Mapper;
 
 
-@Mapper
 public interface EmailConfigMapper extends BaseMapper<EmailConfig> {
 }
