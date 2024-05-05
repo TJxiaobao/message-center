@@ -6,7 +6,6 @@ import com.message.common.domin.MessageTaskInfo;
 import com.message.common.domin.MessageTaskScheduleConfig;
 import com.message.common.enums.MessageTaskInfoStatusEnum;
 import com.message.common.mapper.MessageTaskInfoMapper;
-import com.message.job.config.MailSenderConfig;
 import com.message.job.dispatch.WorkPool;
 import com.message.job.service.MessageRecordService;
 import com.message.job.service.MessageSendTaskService;
@@ -33,7 +32,6 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
 
     private final WorkPool workPool;
 
-    private final MailSenderConfig senderConfig;
 
     @Override
     public void processMessageTasks() {

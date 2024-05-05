@@ -5,20 +5,23 @@ import com.message.common.domin.EmailBlend;
 import com.message.common.domin.EmailConfig;
 import com.message.common.mapper.EmailConfigMapper;
 import com.message.job.factory.EmailFactory;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Configuration
 @Slf4j
-@Component
-@AllArgsConstructor
-public class MailSenderConfig {
-
+public class MailSenderConfig implements ApplicationRunner {
 
     private final EmailConfigMapper mailMapper;
+
+    public MailSenderConfig(EmailConfigMapper mailMapper) {
+        this.mailMapper = mailMapper;
+    }
 
 
     public void buildMailSender() {
@@ -44,5 +47,10 @@ public class MailSenderConfig {
             log.error("数据库无可用的email配置");
         }
 
+    }
+
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        buildMailSender();
     }
 }
