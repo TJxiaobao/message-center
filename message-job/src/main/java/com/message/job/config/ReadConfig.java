@@ -34,7 +34,7 @@ public class ReadConfig implements SmsReadConfig {
                     return config.getSupplier();
                 }
             };
-            BeanUtil.copyProperties(baseConfig, config);
+            BeanUtil.copyProperties(config, baseConfig);
             baseConfigs.add(baseConfig);
         }
         return baseConfigs;
