@@ -24,7 +24,6 @@ import java.util.concurrent.Future;
 @Slf4j
 public class MessageSendTaskServiceImpl implements MessageSendTaskService {
 
-    private final MessageTaskInfoMapper messageTaskInfoMapper;
     private final MessageRecordService messageRecordService;
     private final MessageTaskInfoService messageTaskInfoService;
 
@@ -32,8 +31,7 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
 
     private final WorkPool workPool;
 
-    public MessageSendTaskServiceImpl(MessageTaskInfoMapper messageTaskInfoMapper, MessageRecordService messageRecordService, MessageTaskInfoService messageTaskInfoService, MessageTaskScheduleConfig config, WorkPool workPool) {
-        this.messageTaskInfoMapper = messageTaskInfoMapper;
+    public MessageSendTaskServiceImpl( MessageRecordService messageRecordService, MessageTaskInfoService messageTaskInfoService, MessageTaskScheduleConfig config, WorkPool workPool) {
         this.messageRecordService = messageRecordService;
         this.messageTaskInfoService = messageTaskInfoService;
         this.workPool = workPool;
@@ -52,7 +50,7 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
         LambdaQueryWrapper<MessageTaskInfo> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(MessageTaskInfo::getStatus, MessageTaskInfoStatusEnum.STATUS_ENUM_NO_SEND.getStatusCode())
                 .last("LIMIT " + limit);
-        List<MessageTaskInfo> messageTaskInfos = messageTaskInfoMapper.selectList(queryWrapper);
+        List<MessageTaskInfo> messageTaskInfos = messageTaskInfoService.list(queryWrapper);
         log.info("任务信息:" + messageTaskInfos);
 
         ArrayList<Future<MessageTaskInfo>> futures = new ArrayList<>();
