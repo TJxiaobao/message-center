@@ -1,6 +1,7 @@
 package com.message.job.listener;
 
 import com.message.job.config.ReadConfig;
+import org.dromara.sms4j.core.datainterface.SmsReadConfig;
 import org.dromara.sms4j.core.factory.SmsFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class SmsConfigListener {
 
     @Autowired
-    ReadConfig config;
+    SmsReadConfig config;
 
     @EventListener
     public void init(ContextRefreshedEvent event) {
