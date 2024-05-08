@@ -59,9 +59,10 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
         // 执行任务
         for (MessageTaskInfo task : messageTaskInfos) {
             Future<MessageTaskInfo> messageTaskInfoFuture = workPool.submitJob(new AsyncExecute(task));
+            task.setStatus(MessageTaskInfoStatusEnum.STATUS_ENUM_SENDING.getStatusCode());
             futures.add(messageTaskInfoFuture);
         }
-
+        messageTaskInfoService.updateBatchById(messageTaskInfos);
         // 任务信息刷库
         // 遍历futures列表
         ArrayList<MessageRecord> messageRecords = new ArrayList<>();
