@@ -1,9 +1,14 @@
 package com.message.common.domin;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -48,4 +53,14 @@ public class EmailConfig {
      * 默认编码
      */
     private String defaultEncoding;
+
+    @TableField(value = "created_at", fill = FieldFill.INSERT)
+    private Date createdAt;
+
+    @TableField(value = "updated_at", fill = FieldFill.UPDATE)
+    private Date updatedAt;
+
+    @TableLogic
+    @TableField("is_deleted")
+    private Integer isDeleted;
 }
