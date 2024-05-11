@@ -5,7 +5,6 @@ import com.message.common.domin.MessageRecord;
 import com.message.common.domin.MessageTaskInfo;
 import com.message.common.domin.MessageTaskScheduleConfig;
 import com.message.common.enums.MessageTaskInfoStatusEnum;
-import com.message.common.mapper.MessageTaskInfoMapper;
 import com.message.job.dispatch.WorkPool;
 import com.message.job.service.MessageRecordService;
 import com.message.job.service.MessageSendTaskService;
@@ -31,7 +30,7 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
 
     private final WorkPool workPool;
 
-    public MessageSendTaskServiceImpl( MessageRecordService messageRecordService, MessageTaskInfoService messageTaskInfoService, MessageTaskScheduleConfig config, WorkPool workPool) {
+    public MessageSendTaskServiceImpl(MessageRecordService messageRecordService, MessageTaskInfoService messageTaskInfoService, MessageTaskScheduleConfig config, WorkPool workPool) {
         this.messageRecordService = messageRecordService;
         this.messageTaskInfoService = messageTaskInfoService;
         this.workPool = workPool;
