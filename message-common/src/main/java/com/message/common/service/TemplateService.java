@@ -1,7 +1,6 @@
 package com.message.common.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.message.common.domin.MessageTaskInfo;
 import com.message.common.domin.MessageTemplate;
 import com.message.common.domin.bo.TemplateBo;
 

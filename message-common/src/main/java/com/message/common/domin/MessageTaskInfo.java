@@ -64,7 +64,7 @@ public class MessageTaskInfo {
     /**
      * message 内容
      */
-    private String Content;
+    private String content;
 
     /**
      * message 接受人
