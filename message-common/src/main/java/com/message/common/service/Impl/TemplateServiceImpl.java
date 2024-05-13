@@ -1,17 +1,21 @@
-package com.message.messagesrv.service.Impl;
+package com.message.common.service.Impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.message.common.domin.MessageTemplate;
+import com.message.common.domin.SmsConfig;
 import com.message.common.domin.bo.TemplateBo;
 import com.message.common.mapper.MessageTemplateMapper;
-import com.message.messagesrv.service.TemplateService;
+import com.message.common.mapper.SmsConfigMapper;
+import com.message.common.service.TemplateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
 @Service
 @RequiredArgsConstructor
-public class TemplateServiceImpl implements TemplateService {
+public class TemplateServiceImpl  extends ServiceImpl<MessageTemplateMapper, MessageTemplate>
+        implements TemplateService {
 
     private final MessageTemplateMapper messageTemplateMapper;
 

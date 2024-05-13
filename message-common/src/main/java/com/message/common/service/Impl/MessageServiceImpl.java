@@ -1,4 +1,4 @@
-package com.message.messagesrv.service.Impl;
+package com.message.common.service.Impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -6,7 +6,7 @@ import com.message.common.domin.MessageTaskInfo;
 import com.message.common.domin.bo.MessageTaskInfoBo;
 import com.message.common.enums.MessageTypeEnum;
 import com.message.common.mapper.MessageTaskInfoMapper;
-import com.message.messagesrv.service.MessageService;
+import com.message.common.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

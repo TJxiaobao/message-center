@@ -6,7 +6,7 @@ import com.message.common.domin.MessageTaskInfo;
 import com.message.common.domin.bo.MessageTaskInfoBo;
 import com.message.common.enums.MessageTaskInfoStatusEnum;
 import com.message.common.http.Result;
-import com.message.job.service.MessageRecordService;
+import com.message.common.service.MessageRecordService;
 import com.message.job.service.MessageSendTaskService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
