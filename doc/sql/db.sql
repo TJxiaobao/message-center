@@ -11,6 +11,9 @@ CREATE TABLE email_config
     port             INT COMMENT '端口',
     protocol         VARCHAR(255) COMMENT '协议',
     default_encoding VARCHAR(255) COMMENT '默认编码',
+    created_at       DATETIME COMMENT '创建时间',
+    updated_at       DATETIME COMMENT '更新时间',
+    is_deleted       TINYINT(1) DEFAULT 0 COMMENT '逻辑删除标识，0-未删除，1-已删除',
     PRIMARY KEY (id),
     INDEX idx_config_id (config_id)
 ) ENGINE = InnoDB
@@ -26,6 +29,9 @@ CREATE TABLE sms_config
     access_key_secret VARCHAR(255) COMMENT 'accessKeySecret',
     signature         VARCHAR(255) COMMENT '签名',
     template_id       VARCHAR(255) COMMENT '模版ID',
+    created_at        DATETIME COMMENT '创建时间',
+    updated_at        DATETIME COMMENT '更新时间',
+    is_deleted        TINYINT(1) DEFAULT 0 COMMENT '逻辑删除标识，0-未删除，1-已删除',
     PRIMARY KEY (id),
     UNIQUE INDEX idx_config_id (config_id)
 ) ENGINE = InnoDB
@@ -44,7 +50,7 @@ CREATE TABLE message_task_schedule_config
   DEFAULT CHARSET = utf8mb4 COMMENT ='消息任务调度配置表';
 
 
-CREATE DATABASE message_task;
+# CREATE DATABASE message_task;
 # use message_task;
 -- 创建message_template表
 CREATE TABLE message_template
