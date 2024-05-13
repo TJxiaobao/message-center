@@ -5,11 +5,14 @@ import com.message.common.domin.MessageRecord;
 import com.message.common.domin.MessageTaskInfo;
 import com.message.common.domin.MessageTaskScheduleConfig;
 import com.message.common.enums.MessageTaskInfoStatusEnum;
+import com.message.common.enums.MessageTypeEnum;
+import com.message.common.service.MessageRecordService;
+import com.message.common.service.MessageTaskInfoService;
 import com.message.job.dispatch.WorkPool;
-import com.message.job.service.MessageRecordService;
 import com.message.job.service.MessageSendTaskService;
-import com.message.job.service.MessageTaskInfoService;
 import com.message.job.task.AsyncExecute;
+import com.message.job.task.strategy.SendStrategyFactory;
+import com.message.job.task.type.AbstractSend;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -85,8 +88,34 @@ public class MessageSendTaskServiceImpl implements MessageSendTaskService {
 
 
     @Override
-    public Boolean addTaskInfo() {
-        return null;
+    public Boolean addTaskInfo(MessageTaskInfo messageTaskInfo) {
+        return messageTaskInfoService.save(messageTaskInfo);
+    }
+
+    @Override
+    public MessageTaskInfo doTaskSynchronization(MessageTaskInfo messageTaskInfo) {
+        return send(messageTaskInfo);
+    }
+
+    public MessageTaskInfo send(MessageTaskInfo messageTaskInfo) {
+        // todo 实现发送业务
+        messageTaskInfo.setCrtRetryNum(messageTaskInfo.getCrtRetryNum() + 1);
+        messageTaskInfo.setStatus(MessageTaskInfoStatusEnum.STATUS_ENUM_SENDING.getStatusCode());
+        String statusName = getStatusName(messageTaskInfo.getMsgTaskType());
+        AbstractSend sendMessage = SendStrategyFactory.invoke(statusName);
+        MessageTaskInfo messageTaskInfoByUpdate = sendMessage.send(messageTaskInfo, messageTaskInfo.getConfigId());
+        // todo 更多消息业务
+        return messageTaskInfoByUpdate;
+    }
+
+    private String getStatusName(int type) {
+        if (MessageTypeEnum.SMS.getStatusCode() == type) {
+            return MessageTypeEnum.SMS.getStatusName();
+        } else if (MessageTypeEnum.EMAIL.getStatusCode() == type) {
+            return MessageTypeEnum.EMAIL.getStatusName();
+        } else {
+            return MessageTypeEnum.SMS.getStatusName();
+        }
     }
 
 }

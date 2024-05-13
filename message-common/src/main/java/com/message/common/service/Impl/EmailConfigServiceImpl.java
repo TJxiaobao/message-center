@@ -1,9 +1,9 @@
-package com.message.messagesrv.service.Impl;
+package com.message.common.service.Impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.message.common.domin.EmailConfig;
 import com.message.common.mapper.EmailConfigMapper;
-import com.message.messagesrv.service.EmailConfigService;
+import com.message.common.service.EmailConfigService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
