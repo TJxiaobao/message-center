@@ -13,6 +13,14 @@ import lombok.NoArgsConstructor;
 @ApiModel("邮件配置更新 BO")
 public class EmailConfigUpdateBo {
 
+
+    /**
+     * 配置 ID
+     */
+    @ApiModelProperty(value = "主键 ID", required = true, example = "1")
+    @NotNull
+    private Long id;
+
     /**
      * 配置 ID
      */
