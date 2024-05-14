@@ -86,4 +86,20 @@ class ConfigAPITest {
                 .getContentAsString();
         System.out.println(result);
     }
+
+    @Test
+    void exportEmail() throws Exception {
+        //初始化MockMvc
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+
+
+        //调用接口
+        String result = mockMvc.perform(MockMvcRequestBuilders.delete("/system/config/export/email")
+                        .accept(MediaType.APPLICATION_JSON_VALUE)
+                        .param("id", "1789305474675662850"))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        System.out.println(result);
+    }
 }
