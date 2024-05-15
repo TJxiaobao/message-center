@@ -89,35 +89,35 @@ public class ConfigController {
     }
 
     @ApiOperation("查询单个邮箱配置")
-    @GetMapping("getinfo/email")
+    @GetMapping("/get_info/email")
     public Result<EmailConfig> getInfoEmail(@RequestParam("id") String id) {
         EmailConfig data = emailConfigService.getById(Long.parseLong(id));
         return Result.success("success", data);
     }
 
     @ApiOperation("查询单个短信配置")
-    @GetMapping("getinfo/sms")
+    @GetMapping("/get_info/sms")
     public Result<SmsConfig> getInfoSms(@RequestParam("id") String id) {
         SmsConfig data = smsConfigService.getById(Long.parseLong(id));
         return Result.success("success", data);
     }
 
     @ApiOperation("查询邮箱配置")
-    @GetMapping("list/email")
+    @GetMapping("/list/email")
     public Result<List<EmailConfig>> listEmail(EmailConfigSelectBo bo) {
         List<EmailConfig> data = emailConfigService.getList(bo);
         return Result.success("success", data);
     }
 
     @ApiOperation("查询短信配置")
-    @GetMapping("list/sms")
+    @GetMapping("/list/sms")
     public Result<List<SmsConfig>> listSms(SmsConfigSelectBo bo) {
         List<SmsConfig> data = smsConfigService.getList(bo);
         return Result.success("success", data);
     }
 
     @ApiOperation("导出邮件配置")
-    @PostMapping("export/email")
+    @PostMapping("/export/email")
     public Result<Boolean> exportEmail() {
         LambdaQueryWrapper<EmailConfig> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(EmailConfig::getIsDeleted, 0);
@@ -127,7 +127,7 @@ public class ConfigController {
     }
 
     @ApiOperation("导出短信配置")
-    @PostMapping("export/sms")
+    @PostMapping("/export/sms")
     public Result<Boolean> exportSms() {
         LambdaQueryWrapper<SmsConfig> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(SmsConfig::getIsDeleted, 0);

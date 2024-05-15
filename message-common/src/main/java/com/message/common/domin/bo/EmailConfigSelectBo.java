@@ -75,9 +75,9 @@ public class EmailConfigSelectBo {
     /**
      * 当前页数，从1开始
      **/
-    private Integer currentPage;
+    private Integer pageNum;
     /**
      * 每页记录数
      **/
-    private Integer size;
+    private Integer pageSize;
 }

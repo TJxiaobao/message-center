@@ -20,7 +20,7 @@ public class EmailConfigServiceImpl extends ServiceImpl<EmailConfigMapper, Email
         implements EmailConfigService {
     @Override
     public List<EmailConfig> getList(EmailConfigSelectBo bo) {
-        IPage<EmailConfig> page = new Page<>(bo.getCurrentPage(), bo.getSize());
+        IPage<EmailConfig> page = new Page<>(bo.getPageNum(), bo.getPageSize());
 
         LambdaQueryWrapper<EmailConfig> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.like(!ObjectUtils.isEmpty(bo.getConfigId()), EmailConfig::getConfigId, bo.getConfigId());
