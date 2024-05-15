@@ -72,9 +72,9 @@ public class SmsConfigSelectBo {
     /**
      * 当前页数，从1开始
      **/
-    private Integer currentPage;
+    private Integer pageNum= 0;
     /**
      * 每页记录数
      **/
-    private Integer size;
+    private Integer pageSize=10;
 }

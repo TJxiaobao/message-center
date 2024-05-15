@@ -21,7 +21,7 @@ public class SmsConfigServiceImpl extends ServiceImpl<SmsConfigMapper, SmsConfig
         implements SmsConfigService {
     @Override
     public List<SmsConfig> getList(SmsConfigSelectBo bo) {
-        IPage<SmsConfig> page = new Page<>(bo.getCurrentPage(), bo.getSize());
+        IPage<SmsConfig> page = new Page<>(bo.getPageNum(), bo.getPageSize());
 
         LambdaQueryWrapper<SmsConfig> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.like(!ObjectUtils.isEmpty(bo.getConfigId()), SmsConfig::getConfigId, bo.getConfigId());
