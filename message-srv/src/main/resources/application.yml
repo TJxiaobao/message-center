@@ -1,9 +1,11 @@
+server:
+  port: 8081
 spring:
   application:
     name: Job
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${mysql_host:127.0.0.1}:3306/message-task?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://${mysql_host:127.0.0.1}:3306/message_job?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
     username: ${mysql_username:root}
     password: ${mysql_password:root}
     hikari:
