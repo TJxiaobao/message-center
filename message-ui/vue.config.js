@@ -30,8 +30,27 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
-    port: port,
+    // port: port,
+    host: '127.0.0.1',
+    port: 8085,
     open: true,
+    proxy: { //配置跨域
+
+      "/msg-srv": {
+        //这里是调本地的后端,在服务器的时候也是调服务器本地的后端
+        target: 'http://localhost:8081',
+        //允许跨域
+        changeOrigin: true,
+        ws: false,
+        pathRewrite: {"^/msg-srv": ""}
+      },
+      "/msg-job": {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        ws: false,
+        pathRewrite: {"^/msg-job": ""}
+      }
+    },
     overlay: {
       warnings: false,
       errors: true
